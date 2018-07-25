@@ -22,7 +22,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     return new ServletRegistrationBean(servlet, "/Services/TM/v20/Messaging/*");
   }
 
-  // creates a .../GenericOutgoingWsMock.wsdl
+  // creates a .../GenericOutgoingWs.wsdl
   @Bean(name = "GenericOutgoingWsSoap")
   public Wsdl11Definition defaultGenericOutgoingWsWsdl11Definition() {
     SimpleWsdl11Definition wsdl11Definition = new SimpleWsdl11Definition();
@@ -38,8 +38,8 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     return wsdl11Definition;
   }
 
-  // creates a .../OutgoingWsMock.wsdl
-  @Bean(name = "OutgoingWsMock")
+  // creates a .../OutgoingWs.wsdl
+  @Bean(name = "OutgoingWs")
   public Wsdl11Definition defaultOutgoingWsWsdl11Definition() {
     SimpleWsdl11Definition wsdl11Definition = new SimpleWsdl11Definition();
     wsdl11Definition.setWsdl(new ClassPathResource("/wsdl/Messaging_OutgoingWs.wsdl"));

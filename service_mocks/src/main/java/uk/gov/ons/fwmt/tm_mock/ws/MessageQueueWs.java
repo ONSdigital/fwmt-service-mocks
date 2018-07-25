@@ -66,7 +66,7 @@ import javax.xml.bind.JAXBElement;
 
 @Slf4j
 @Endpoint
-public class MessageQueueWsMock {
+public class MessageQueueWs {
   private static final String NAMESPACE_URI = "http://schemas.consiliumtechnologies.com/services/mobile/2007/07/messaging";
 
   private ObjectFactory objectFactory = new ObjectFactory();

@@ -13,7 +13,7 @@ import javax.xml.namespace.QName;
 
 @Slf4j
 @Endpoint
-public class GenericOutgoingWsMock {
+public class GenericOutgoingWs {
   private static final String NAMESPACE_URI = "http://schemas.consiliumtechnologies.com/services/mobile/2009/03/messaging";
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "request")

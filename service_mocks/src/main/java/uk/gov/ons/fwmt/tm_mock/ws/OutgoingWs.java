@@ -8,30 +8,38 @@ import com.consiliumtechnologies.schemas.mobile._2009._03.visitsmessages.UpdateV
 import com.consiliumtechnologies.schemas.mobile._2009._07.formsmessages.SubmitFormResultRequest;
 import com.consiliumtechnologies.schemas.mobile._2009._09.compositemessages.CompositeVisitRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+import uk.gov.ons.fwmt.tm_mock.logging.Logger;
 
 import javax.xml.bind.JAXBElement;
 
 @Slf4j
 @Endpoint
-public class OutgoingWsMock {
+public class OutgoingWs {
   // mirrored in @Value("outgoing-ws-namespace")
   private static final String NAMESPACE_URI = "http://schemas.consiliumtechnologies.com/services/mobile/2009/03/messaging";
 
-  private void stub(String messageType) {
+  @Autowired
+  Logger messageLogger;
+
+  private void report(String messageType) {
     log.debug("Found message of type {}", messageType);
+    //    messageLogger.messages.add(request);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateVisitStatusRequest")
   @ResponsePayload
   public JAXBElement<UpdateVisitStatusRequest> sendUpdateVisitStatusRequestOutput(
-      @RequestPayload JAXBElement<UpdateVisitStatusRequest> request) {
-    stub("SendUpdateVisitStatusRequestOutput");
-    request.setValue(null);
-    return request;
+      HttpEntity<JAXBElement<UpdateVisitStatusRequest>> request) {
+    report("SendUpdateVisitStatusRequestOutput");
+    JAXBElement<UpdateVisitStatusRequest> jaxb = request.getBody();
+    jaxb.setValue(null);
+    return jaxb;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "completeVisitRequest")
@@ -40,7 +48,7 @@ public class OutgoingWsMock {
   // http://forum.spring.io/forum/spring-projects/web-services/42740-responding-with-an-empty-soap-body
   public JAXBElement<CompleteVisitRequest> sendCompleteVisitStatusRequestOutputLowercase(
       @RequestPayload JAXBElement<CompleteVisitRequest> request) {
-    stub("SendCompleteVisitStatusRequestOutput");
+    report("SendCompleteVisitStatusRequestOutput");
     request.setValue(null);
     return request;
   }
@@ -49,7 +57,7 @@ public class OutgoingWsMock {
   @ResponsePayload
   public JAXBElement<RequestVisitRequest> sendRequestVisitRequestOutput(
       @RequestPayload JAXBElement<RequestVisitRequest> request) {
-    stub("SendRequestVisitRequestOutput");
+    report("SendRequestVisitRequestOutput");
     request.setValue(null);
     return request;
   }
@@ -58,7 +66,7 @@ public class OutgoingWsMock {
   @ResponsePayload
   public JAXBElement<SubmitDocumentRequest> sendSubmitDocumentRequestOutput(
       @RequestPayload JAXBElement<SubmitDocumentRequest> request) {
-    stub("SendSubmitDocumentRequestOutput");
+    report("SendSubmitDocumentRequestOutput");
     request.setValue(null);
     return request;
   }
@@ -67,7 +75,7 @@ public class OutgoingWsMock {
   @ResponsePayload
   public JAXBElement<CompositeVisitRequest> sendCompositeVisitRequestOutput(
       @RequestPayload JAXBElement<CompositeVisitRequest> request) {
-    stub("SendCompositeVisitRequestOutput");
+    report("SendCompositeVisitRequestOutput");
     request.setValue(null);
     return request;
   }
@@ -76,7 +84,7 @@ public class OutgoingWsMock {
   @ResponsePayload
   public JAXBElement<SubmitFormResultRequest> sendSubmitFormResultRequestOutput(
       @RequestPayload JAXBElement<SubmitFormResultRequest> request) {
-    stub("SendSubmitFormResultRequestOutput");
+    report("SendSubmitFormResultRequestOutput");
     request.setValue(null);
     return request;
   }
@@ -85,7 +93,7 @@ public class OutgoingWsMock {
   @ResponsePayload
   public JAXBElement<SubmitLocationRequest> sendSubmitLocationRequestOutput(
       @RequestPayload JAXBElement<SubmitLocationRequest> request) {
-    stub("SendSubmitLocationRequestOutput");
+    report("SendSubmitLocationRequestOutput");
     request.setValue(null);
     return request;
   }
