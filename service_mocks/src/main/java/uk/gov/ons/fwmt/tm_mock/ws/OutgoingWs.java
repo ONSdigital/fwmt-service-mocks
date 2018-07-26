@@ -14,7 +14,7 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import uk.gov.ons.fwmt.tm_mock.logging.Logger;
+import uk.gov.ons.fwmt.tm_mock.logging.WsLogger;
 
 import javax.xml.bind.JAXBElement;
 
@@ -25,21 +25,19 @@ public class OutgoingWs {
   private static final String NAMESPACE_URI = "http://schemas.consiliumtechnologies.com/services/mobile/2009/03/messaging";
 
   @Autowired
-  Logger messageLogger;
+  WsLogger messageWsLogger;
 
   private void report(String messageType) {
     log.debug("Found message of type {}", messageType);
-    //    messageLogger.messages.add(request);
+    //    messageWsLogger.wsMessages.add(request);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateVisitStatusRequest")
   @ResponsePayload
-  public JAXBElement<UpdateVisitStatusRequest> sendUpdateVisitStatusRequestOutput(
-      HttpEntity<JAXBElement<UpdateVisitStatusRequest>> request) {
+  public void sendUpdateVisitStatusRequestOutput(
+      @RequestPayload JAXBElement<UpdateVisitStatusRequest> request) {
     report("SendUpdateVisitStatusRequestOutput");
-    JAXBElement<UpdateVisitStatusRequest> jaxb = request.getBody();
-    jaxb.setValue(null);
-    return jaxb;
+    JAXBElement<UpdateVisitStatusRequest> jaxb = request;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "completeVisitRequest")

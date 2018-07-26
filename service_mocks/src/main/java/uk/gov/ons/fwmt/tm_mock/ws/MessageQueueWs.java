@@ -60,7 +60,7 @@ import com.consiliumtechnologies.schemas.services.mobile._2009._03.messaging.Tra
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import uk.gov.ons.fwmt.tm_mock.logging.Logger;
+import uk.gov.ons.fwmt.tm_mock.logging.WsLogger;
 
 import javax.xml.bind.JAXBElement;
 
@@ -72,11 +72,11 @@ public class MessageQueueWs {
   private ObjectFactory objectFactory = new ObjectFactory();
 
   @Autowired
-  Logger messageLogger;
+  WsLogger messageWsLogger;
 
   private <T> void report(String messageType, T request) {
     log.debug("Found message of type {}", messageType);
-//    messageLogger.messages.add(request);
+//    messageWsLogger.wsMessages.add(request);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendMessageRequest")
