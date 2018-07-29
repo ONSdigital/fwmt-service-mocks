@@ -13,20 +13,18 @@ import java.time.LocalDateTime;
 
 @Component
 public class RawXmlInterceptor implements SoapEndpointInterceptor {
-  public static ThreadLocal<WsMessage> currentMessage = new ThreadLocal<>();
-
   @Autowired private WsLogger wsLogger;
 
   private void setupCurrentMessage() {
-    if (currentMessage.get() == null) {
+    if (wsLogger.currentMessage.get() == null) {
       WsMessage message = new WsMessage();
-      currentMessage.set(message);
+      wsLogger.currentMessage.set(message);
       wsLogger.logWsMessage(message);
     }
   }
 
   private void tearDownCurrentMessage() {
-    currentMessage.remove();
+    wsLogger.currentMessage.remove();
   }
 
   @Override public boolean understands(SoapHeaderElement header) {
@@ -37,8 +35,8 @@ public class RawXmlInterceptor implements SoapEndpointInterceptor {
     setupCurrentMessage();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     messageContext.getRequest().writeTo(outputStream);
-    currentMessage.get().requestRawHtml = outputStream.toString();
-    currentMessage.get().requestTimestamp = LocalDateTime.now();
+    wsLogger.currentMessage.get().requestRawHtml = outputStream.toString();
+    wsLogger.currentMessage.get().requestTimestamp = LocalDateTime.now();
     return true;
   }
 
@@ -46,8 +44,8 @@ public class RawXmlInterceptor implements SoapEndpointInterceptor {
     setupCurrentMessage();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     messageContext.getResponse().writeTo(outputStream);
-    currentMessage.get().responseRawHtml = outputStream.toString();
-    currentMessage.get().responseTimestamp = LocalDateTime.now();
+    wsLogger.currentMessage.get().responseRawHtml = outputStream.toString();
+    wsLogger.currentMessage.get().responseTimestamp = LocalDateTime.now();
     return true;
   }
 
@@ -55,8 +53,8 @@ public class RawXmlInterceptor implements SoapEndpointInterceptor {
     setupCurrentMessage();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     messageContext.getResponse().writeTo(outputStream);
-    currentMessage.get().faultRawHtml = outputStream.toString();
-    currentMessage.get().faultTimestamp = LocalDateTime.now();
+    wsLogger.currentMessage.get().faultRawHtml = outputStream.toString();
+    wsLogger.currentMessage.get().faultTimestamp = LocalDateTime.now();
     return true;
   }
 

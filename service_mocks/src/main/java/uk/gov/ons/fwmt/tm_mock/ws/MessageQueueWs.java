@@ -72,18 +72,17 @@ public class MessageQueueWs {
   private ObjectFactory objectFactory = new ObjectFactory();
 
   @Autowired
-  WsLogger messageWsLogger;
-
-  private <T> void report(String messageType, T request) {
-    log.debug("Found message of type {}", messageType);
-//    messageWsLogger.wsMessages.add(request);
-  }
+  private WsLogger wsLogger;
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendMessageRequest")
   @ResponsePayload
   public JAXBElement<SendMessageResponse> sendMessage(@RequestPayload JAXBElement<SendMessageRequest> request) {
-    report("SendMessage", request.getValue());
+    wsLogger.logEndpoint("SendMessage");
+    wsLogger.logRequest(request.getValue());
+
     SendMessageResponse response = new SendMessageResponse();
+
+    wsLogger.logResponse(response);
     return objectFactory.createSendMessageResponse(response);
   }
 
@@ -91,48 +90,72 @@ public class MessageQueueWs {
   @ResponsePayload
   public JAXBElement<TransformAndSendResponse> transformAndSendMessage(
       @RequestPayload JAXBElement<TransformAndSendRequest> request) {
-    report("TransformAndSendMessage", request.getValue());
+    wsLogger.logEndpoint("TransformAndSendMessage");
+    wsLogger.logRequest(request.getValue());
+
     TransformAndSendResponse response = new TransformAndSendResponse();
+
+    wsLogger.logResponse(response);
     return objectFactory.createTransformAndSendResponse(response);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "QueryMessagesRequest")
   @ResponsePayload
   public JAXBElement<QueryMessagesResponse> query(@RequestPayload JAXBElement<QueryMessagesRequest> request) {
-    report("Query", request.getValue());
+    wsLogger.logEndpoint("Query");
+    wsLogger.logRequest(request.getValue());
+
     QueryMessagesResponse response = new QueryMessagesResponse();
+
+    wsLogger.logResponse(response);
     return objectFactory.createQueryMessagesResponse(response);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetMessageRequest")
   @ResponsePayload
   public JAXBElement<GetMessageResponse> get(@RequestPayload JAXBElement<GetMessageRequest> request) {
-    report("Get", request.getValue());
+    wsLogger.logEndpoint("Get");
+    wsLogger.logRequest(request.getValue());
+
     GetMessageResponse response = new GetMessageResponse();
+
+    wsLogger.logResponse(response);
     return objectFactory.createGetMessageResponse(response);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteMessageRequest")
   @ResponsePayload
   public JAXBElement<DeleteMessageResponse> delete(@RequestPayload JAXBElement<DeleteMessageRequest> request) {
-    report("Delete", request.getValue());
+    wsLogger.logEndpoint("Delete");
+    wsLogger.logRequest(request.getValue());
+
     DeleteMessageResponse response = new DeleteMessageResponse();
+
+    wsLogger.logResponse(response);
     return objectFactory.createDeleteMessageResponse(response);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "RetryMessageRequest")
   @ResponsePayload
   public JAXBElement<RetryMessageResponse> retry(@RequestPayload JAXBElement<RetryMessageRequest> request) {
-    report("Retry", request.getValue());
+    wsLogger.logEndpoint("Retry");
+    wsLogger.logRequest(request.getValue());
+
     RetryMessageResponse response = new RetryMessageResponse();
+
+    wsLogger.logResponse(response);
     return objectFactory.createRetryMessageResponse(response);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ResetMessageRequest")
   @ResponsePayload
   public JAXBElement<ResetMessageResponse> reset(@RequestPayload JAXBElement<ResetMessageRequest> request) {
-    report("Reset", request.getValue());
+    wsLogger.logEndpoint("Reset");
+    wsLogger.logRequest(request.getValue());
+
     ResetMessageResponse response = new ResetMessageResponse();
+
+    wsLogger.logResponse(response);
     return objectFactory.createResetMessageResponse(response);
   }
 
@@ -140,151 +163,246 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendCreateVisitRequestMessageResponse sendCreateVisitRequestMessage(
       @RequestPayload SendCreateVisitRequestMessage request) {
-    report("SendCreateVisitRequestMessage", request);
-    return new SendCreateVisitRequestMessageResponse();
+    wsLogger.logEndpoint("SendCreateVisitRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendCreateVisitRequestMessageResponse response = new SendCreateVisitRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendForceRecallVisitRequestMessage")
   @ResponsePayload
   public SendForceRecallVisitRequestMessageResponse sendForceRecallVisitRequestMessage(
       @RequestPayload SendForceRecallVisitRequestMessage request) {
-    report("SendForceRecallVisitRequestMessage", request);
-    return new SendForceRecallVisitRequestMessageResponse();
+    wsLogger.logEndpoint("SendForceRecallVisitRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendForceRecallVisitRequestMessageResponse response = new SendForceRecallVisitRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendAddVisitTasksRequestMessage")
   @ResponsePayload
   public SendAddVisitTasksRequestMessageResponse sendAddVisitTasksRequestMessage(
       @RequestPayload SendAddVisitTasksRequestMessage request) {
-    report("SendAddVisitTasksRequestMessage", request);
-    return new SendAddVisitTasksRequestMessageResponse();
+    wsLogger.logEndpoint("SendAddVisitTasksRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendAddVisitTasksRequestMessageResponse response = new SendAddVisitTasksRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendUpdateVisitScheduleRequestMessage")
   @ResponsePayload
   public SendUpdateVisitScheduleRequestMessageResponse sendUpdateVisitScheduleRequestMessage(
       @RequestPayload SendUpdateVisitScheduleRequestMessage request) {
-    report("SendUpdateVisitScheduleRequestMessage", request);
-    return new SendUpdateVisitScheduleRequestMessageResponse();
+    wsLogger.logEndpoint("SendUpdateVisitScheduleRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendUpdateVisitScheduleRequestMessageResponse response = new SendUpdateVisitScheduleRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendUpdateVisitHeaderRequestMessage")
   @ResponsePayload
   public SendUpdateVisitHeaderRequestMessageResponse sendUpdateVisitHeaderRequestMessage(
       @RequestPayload SendUpdateVisitHeaderRequestMessage request) {
-    report("SendUpdateVisitHeaderRequestMessage", request);
-    return new SendUpdateVisitHeaderRequestMessageResponse();
+    wsLogger.logEndpoint("SendUpdateVisitHeaderRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendUpdateVisitHeaderRequestMessageResponse response = new SendUpdateVisitHeaderRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendCreateBulletinRequestMessage")
   @ResponsePayload
   public SendCreateBulletinRequestMessageResponse sendCreateBulletinRequestMessage(
       @RequestPayload SendCreateBulletinRequestMessage request) {
-    report("SendCreateBulletinRequestMessage", request);
-    return new SendCreateBulletinRequestMessageResponse();
+    wsLogger.logEndpoint("SendCreateBulletinRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendCreateBulletinRequestMessageResponse response = new SendCreateBulletinRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendDeleteBulletinRequestMessage")
   @ResponsePayload
   public SendDeleteBulletinRequestMessageResponse sendDeleteBulletinRequestMessage(
       @RequestPayload SendDeleteBulletinRequestMessage request) {
-    report("SendDeleteBulletinRequestMessage", request);
-    return new SendDeleteBulletinRequestMessageResponse();
+    wsLogger.logEndpoint("SendDeleteBulletinRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendDeleteBulletinRequestMessageResponse response = new SendDeleteBulletinRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendGenerateFolioContentRequestMessage")
   @ResponsePayload
   public SendGenerateFolioContentRequestMessageResponse sendGenerateFolioContentRequestMessage(
       @RequestPayload SendGenerateFolioContentRequestMessage request) {
-    report("SendGenerateFolioContentRequestMessage", request);
-    return new SendGenerateFolioContentRequestMessageResponse();
+    wsLogger.logEndpoint("SendGenerateFolioContentRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendGenerateFolioContentRequestMessageResponse response = new SendGenerateFolioContentRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendAddFolioContentRequestMessage")
   @ResponsePayload
   public SendAddFolioContentRequestMessageResponse sendAddFolioContentRequestMessage(
       @RequestPayload SendAddFolioContentRequestMessage request) {
-    report("SendAddFolioContentRequestMessage", request);
-    return new SendAddFolioContentRequestMessageResponse();
+    wsLogger.logEndpoint("SendAddFolioContentRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendAddFolioContentRequestMessageResponse response = new SendAddFolioContentRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendCreateReferralRequestMessage")
   @ResponsePayload
   public SendCreateReferralRequestMessageResponse sendCreateReferralRequestMessage(
       @RequestPayload SendCreateReferralRequestMessage request) {
-    report("SendCreateReferralRequestMessage", request);
-    return new SendCreateReferralRequestMessageResponse();
+    wsLogger.logEndpoint("SendCreateReferralRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendCreateReferralRequestMessageResponse response = new SendCreateReferralRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendCreatePatientRequestMessage")
   @ResponsePayload
   public SendCreatePatientRequestMessageResponse sendCreatePatientRequestMessage(
       @RequestPayload SendCreatePatientRequestMessage request) {
-    report("SendCreatePatientRequestMessage", request);
-    return new SendCreatePatientRequestMessageResponse();
+    wsLogger.logEndpoint("SendCreatePatientRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendCreatePatientRequestMessageResponse response = new SendCreatePatientRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendUpdateReferralRequestMessage")
   @ResponsePayload
   public SendUpdateReferralRequestMessageResponse sendUpdateReferralRequestMessage(
       @RequestPayload SendUpdateReferralRequestMessage request) {
-    report("SendUpdateReferralRequestMessage", request);
-    return new SendUpdateReferralRequestMessageResponse();
+    wsLogger.logEndpoint("SendUpdateReferralRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendUpdateReferralRequestMessageResponse response = new SendUpdateReferralRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendCreateAppointmentRequestMessage")
   @ResponsePayload
   public SendCreateAppointmentRequestMessageResponse sendCreateAppointmentRequestMessage(
       @RequestPayload SendCreateAppointmentRequestMessage request) {
-    report("SendCreateAppointmentRequestMessage", request);
-    return new SendCreateAppointmentRequestMessageResponse();
+    wsLogger.logEndpoint("SendCreateAppointmentRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendCreateAppointmentRequestMessageResponse response = new SendCreateAppointmentRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendDischargeReferralRequestMessage")
   @ResponsePayload
   public SendDischargeReferralRequestMessageResponse sendDischargeReferralRequestMessage(
       @RequestPayload SendDischargeReferralRequestMessage request) {
-    report("SendDischargeReferralRequestMessage", request);
-    return new SendDischargeReferralRequestMessageResponse();
+    wsLogger.logEndpoint("SendDischargeReferralRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendDischargeReferralRequestMessageResponse response = new SendDischargeReferralRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendCreateJobRequestMessage")
   @ResponsePayload
   public SendCreateJobRequestMessageResponse sendCreateJobRequestMessage(
       @RequestPayload SendCreateJobRequestMessage request) {
-    report("SendCreateJobRequestMessage", request);
-    return new SendCreateJobRequestMessageResponse();
+    wsLogger.logEndpoint("SendCreateJobRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendCreateJobRequestMessageResponse response = new SendCreateJobRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendDeleteJobRequestMessage")
   @ResponsePayload
   public SendDeleteJobRequestMessageResponse sendDeleteJobRequestMessage(
       @RequestPayload SendDeleteJobRequestMessage request) {
-    report("SendDeleteJobRequestMessage", request);
-    return new SendDeleteJobRequestMessageResponse();
+    wsLogger.logEndpoint("SendDeleteJobRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendDeleteJobRequestMessageResponse response = new SendDeleteJobRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendAddJobTasksRequestMessage")
   @ResponsePayload
   public SendAddJobTasksRequestMessageResponse sendAddJobTasksRequestMessage(
       @RequestPayload SendAddJobTasksRequestMessage request) {
-    report("SendAddJobTasksRequestMessage", request);
-    return new SendAddJobTasksRequestMessageResponse();
+    wsLogger.logEndpoint("SendAddJobTasksRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendAddJobTasksRequestMessageResponse response = new SendAddJobTasksRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendSaveAvailabilityRequestMessage")
   @ResponsePayload
   public SendSaveAvailabilityRequestMessageResponse sendSaveAvailabilityRequestMessage(
       @RequestPayload SendSaveAvailabilityRequestMessage request) {
-    report("SendSaveAvailabilityRequestMessage", request);
-    return new SendSaveAvailabilityRequestMessageResponse();
+    wsLogger.logEndpoint("SendSaveAvailabilityRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendSaveAvailabilityRequestMessageResponse response = new SendSaveAvailabilityRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendUpdateJobHeaderRequestMessage")
   @ResponsePayload
   public SendUpdateJobHeaderRequestMessageResponse sendUpdateJobHeaderRequestMessage(
       @RequestPayload SendUpdateJobHeaderRequestMessage request) {
-    report("SendUpdateJobHeaderRequestMessage", request);
-    return new SendUpdateJobHeaderRequestMessageResponse();
+    wsLogger.logEndpoint("SendUpdateJobHeaderRequestMessage");
+    wsLogger.logRequest(request);
+
+    SendUpdateJobHeaderRequestMessageResponse response = new SendUpdateJobHeaderRequestMessageResponse();
+
+    wsLogger.logResponse(response);
+    return response;
   }
 }

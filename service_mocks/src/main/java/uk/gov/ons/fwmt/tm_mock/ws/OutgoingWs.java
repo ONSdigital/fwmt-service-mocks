@@ -21,78 +21,73 @@ import javax.xml.bind.JAXBElement;
 @Slf4j
 @Endpoint
 public class OutgoingWs {
-  // mirrored in @Value("outgoing-ws-namespace")
   private static final String NAMESPACE_URI = "http://schemas.consiliumtechnologies.com/services/mobile/2009/03/messaging";
 
   @Autowired
-  WsLogger messageWsLogger;
-
-  private void report(String messageType) {
-    log.debug("Found message of type {}", messageType);
-    //    messageWsLogger.wsMessages.add(request);
-  }
+  WsLogger wsLogger;
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateVisitStatusRequest")
   @ResponsePayload
   public void sendUpdateVisitStatusRequestOutput(
       @RequestPayload JAXBElement<UpdateVisitStatusRequest> request) {
-    report("SendUpdateVisitStatusRequestOutput");
-    JAXBElement<UpdateVisitStatusRequest> jaxb = request;
+    wsLogger.logEndpoint("SendMessage");
+    wsLogger.logRequest(request.getValue());
+    wsLogger.logResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "completeVisitRequest")
   @ResponsePayload
   // TODO find a way to do this without returning the input
   // http://forum.spring.io/forum/spring-projects/web-services/42740-responding-with-an-empty-soap-body
-  public JAXBElement<CompleteVisitRequest> sendCompleteVisitStatusRequestOutputLowercase(
+  public void sendCompleteVisitStatusRequestOutputLowercase(
       @RequestPayload JAXBElement<CompleteVisitRequest> request) {
-    report("SendCompleteVisitStatusRequestOutput");
-    request.setValue(null);
-    return request;
+    wsLogger.logEndpoint("SendCompleteVisitStatusRequestOutput");
+    wsLogger.logRequest(request);
+    wsLogger.logResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "requestVisitRequest")
   @ResponsePayload
-  public JAXBElement<RequestVisitRequest> sendRequestVisitRequestOutput(
+  public void sendRequestVisitRequestOutput(
       @RequestPayload JAXBElement<RequestVisitRequest> request) {
-    report("SendRequestVisitRequestOutput");
-    request.setValue(null);
-    return request;
+    wsLogger.logEndpoint("SendRequestVisitRequestOutput");
+    wsLogger.logRequest(request);
+    wsLogger.logResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "submitDocumentRequest")
   @ResponsePayload
-  public JAXBElement<SubmitDocumentRequest> sendSubmitDocumentRequestOutput(
+  public void sendSubmitDocumentRequestOutput(
       @RequestPayload JAXBElement<SubmitDocumentRequest> request) {
-    report("SendSubmitDocumentRequestOutput");
-    request.setValue(null);
-    return request;
+    wsLogger.logEndpoint("SendSubmitDocumentRequestOutput");
+    wsLogger.logRequest(request);
+    wsLogger.logResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "compositeVisitRequest")
   @ResponsePayload
-  public JAXBElement<CompositeVisitRequest> sendCompositeVisitRequestOutput(
+  public void sendCompositeVisitRequestOutput(
       @RequestPayload JAXBElement<CompositeVisitRequest> request) {
-    report("SendCompositeVisitRequestOutput");
-    request.setValue(null);
-    return request;
+    wsLogger.logEndpoint("SendCompositeVisitRequestOutput");
+    wsLogger.logRequest(request);
+    wsLogger.logResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "submitFormResultRequest")
   @ResponsePayload
-  public JAXBElement<SubmitFormResultRequest> sendSubmitFormResultRequestOutput(
+  public void sendSubmitFormResultRequestOutput(
       @RequestPayload JAXBElement<SubmitFormResultRequest> request) {
-    report("SendSubmitFormResultRequestOutput");
-    request.setValue(null);
-    return request;
+    wsLogger.logEndpoint("SendSubmitFormResultRequestOutput");
+    wsLogger.logRequest(request);
+    wsLogger.logResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "submitLocationRequest")
   @ResponsePayload
-  public JAXBElement<SubmitLocationRequest> sendSubmitLocationRequestOutput(
+  public void sendSubmitLocationRequestOutput(
       @RequestPayload JAXBElement<SubmitLocationRequest> request) {
-    report("SendSubmitLocationRequestOutput");
-    request.setValue(null);
-    return request;
+    wsLogger.logEndpoint("SendSubmitLocationRequestOutput");
+    wsLogger.logRequest(request);
+    wsLogger.logResponse(null);
   }
 }
