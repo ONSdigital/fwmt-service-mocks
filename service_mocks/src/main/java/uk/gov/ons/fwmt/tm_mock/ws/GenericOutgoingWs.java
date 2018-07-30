@@ -1,6 +1,5 @@
 package uk.gov.ons.fwmt.tm_mock.ws;
 
-import com.consiliumtechnologies.schemas.services.mobile._2009._03.messaging.SendMessageResponse;
 import com.consiliumtechnologies.schemas.services.mobile._2009._03.messaging.WebServiceAdapterOutputRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +15,23 @@ import javax.xml.namespace.QName;
 @Slf4j
 @Endpoint
 public class GenericOutgoingWs {
-  private static final String NAMESPACE_URI = "http://schemas.consiliumtechnologies.com/services/mobile/2007/07/messaging";
-
   @Autowired
   WsLogger wsLogger;
 
-  @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendAdapterOutput")
+  // This endpoint doesn't work because of how Spring reacts to the message, instead of the SOAPAction
+  @PayloadRoot(namespace = "http://schemas.consiliumtechnologies.com/services/mobile/2007/07/messaging", localPart = "SendAdapterOutput")
   @ResponsePayload
-  public void sendAdapterOutput(@RequestPayload JAXBElement<WebServiceAdapterOutputRequest> request) {
+  public JAXBElement<Void> sendAdapterOutput(@RequestPayload JAXBElement<WebServiceAdapterOutputRequest> request) {
     wsLogger.logEndpoint("SendMessage");
     wsLogger.logRequest(request.getValue());
+    JAXBElement<Void> response = new JAXBElement<>(new QName(null, "null"), Void.class, null);
     wsLogger.logResponse(null);
+    return response;
+  }
+
+  @PayloadRoot(namespace = "http://schemas.consiliumtechnologies.com/services/mobile/2009/03/messaging", localPart = "request")
+  @ResponsePayload
+  public JAXBElement<Void> request(@RequestPayload JAXBElement<WebServiceAdapterOutputRequest> request) {
+    return sendAdapterOutput(request);
   }
 }
