@@ -9,7 +9,7 @@ import java.util.List;
 public class WsLogger {
   public ThreadLocal<WsMessage> currentMessage = new ThreadLocal<>();
 
-  private List<WsMessage> messages = new ArrayList<>();
+  public List<WsMessage> messages = new ArrayList<>();
 
   public void logWsMessage(WsMessage message) {
     messages.add(message);

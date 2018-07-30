@@ -1,14 +1,17 @@
 package uk.gov.ons.fwmt.tm_mock.rest;
 
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.ons.fwmt.tm_mock.logging.WsLogger;
+import uk.gov.ons.fwmt.tm_mock.logging.WsMessage;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("monitor")
 public class MonitoringRest {
   WsLogger wsLogger;
 
@@ -17,13 +20,13 @@ public class MonitoringRest {
     this.wsLogger = wsLogger;
   }
 
-  @RequestMapping(value = "/samples", method = RequestMethod.POST, produces = "application/json")
-  @ApiResponses(value = {
-      @ApiResponse(code = 400, message = "Bad Request"),
-      @ApiResponse(code = 415, message = "Unsupported Media Type"),
-      @ApiResponse(code = 500, message = "Internal Server Error"),
-  })
-  public String test() {
-    return "Test";
+  @GetMapping(value = "allMessages", produces = "application/json")
+  public List<WsMessage> getAllMessages() {
+    return wsLogger.messages;
+  }
+
+  @GetMapping(value = "faultCount", produces = "application/json")
+  public int getFaultCount() {
+    return (int) (wsLogger.messages.stream().filter(m -> m.faultTimestamp != null).count());
   }
 }
