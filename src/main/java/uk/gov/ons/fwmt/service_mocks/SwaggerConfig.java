@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.tm_mock;
+package uk.gov.ons.fwmt.service_mocks;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis( RequestHandlerSelectors.basePackage("uk.gov.ons.fwmt.tm_mock"))
+                .apis( RequestHandlerSelectors.basePackage("uk.gov.ons.fwmt.service_mocks"))
                 .paths(PathSelectors.any())
                 .build();
     }

@@ -1,12 +1,11 @@
-package uk.gov.ons.fwmt.tm_mock.rest;
+package uk.gov.ons.fwmt.service_mocks.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import uk.gov.ons.fwmt.tm_mock.logging.WsLogger;
-import uk.gov.ons.fwmt.tm_mock.logging.WsMessage;
+import uk.gov.ons.fwmt.service_mocks.logging.WsLogger;
+import uk.gov.ons.fwmt.service_mocks.logging.WsMessage;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@ apply plugin: 'idea'
 apply plugin: 'application'
 apply plugin: 'org.springframework.boot'
 
-mainClassName = 'uk.gov.ons.fwmt.tm_mock.Application'
+mainClassName = 'uk.gov.ons.fwmt.service_mocks.Application'
 
 description = "fwmt-service-mocks"
 

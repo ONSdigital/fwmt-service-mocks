@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.tm_mock.logging;
+package uk.gov.ons.fwmt.service_mocks.logging;
 
 import lombok.Data;
 
