@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.tm_mock.ws;
+package uk.gov.ons.fwmt.service_mocks.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;

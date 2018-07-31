@@ -1,8 +1,13 @@
-package uk.gov.ons.fwmt.tm_mock.logging;
+package uk.gov.ons.fwmt.service_mocks.logging;
+
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@Data
 public class WsMessage {
+
+  public String endpoint;
 
   public LocalDateTime requestTimestamp;
   public String requestRawHeaders;
