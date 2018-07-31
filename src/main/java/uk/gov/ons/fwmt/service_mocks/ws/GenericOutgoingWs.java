@@ -18,8 +18,14 @@ public class GenericOutgoingWs {
   @Autowired
   WsLogger wsLogger;
 
-  // This endpoint doesn't work because of how Spring reacts to the message, instead of the SOAPAction
-  @PayloadRoot(namespace = "http://schemas.consiliumtechnologies.com/services/mobile/2007/07/messaging", localPart = "SendAdapterOutput")
+  // Ideally, the method signature would be as below
+  // Spring does not appear to respect SOAPAction
+  // Therefore, a alternative signature is used
+  // TODO fix this
+  //  @PayloadRoot(namespace = "http://schemas.consiliumtechnologies.com/services/mobile/2007/07/messaging", localPart = "SendAdapterOutput")
+  //  @ResponsePayload
+  //  public JAXBElement<Void> sendAdapterOutput(@RequestPayload JAXBElement<WebServiceAdapterOutputRequest> request) {
+  @PayloadRoot(namespace = "http://schemas.consiliumtechnologies.com/services/mobile/2009/03/messaging", localPart = "request")
   @ResponsePayload
   public JAXBElement<Void> sendAdapterOutput(@RequestPayload JAXBElement<WebServiceAdapterOutputRequest> request) {
     wsLogger.logEndpoint("SendMessage");
@@ -27,11 +33,5 @@ public class GenericOutgoingWs {
     JAXBElement<Void> response = new JAXBElement<>(new QName(null, "null"), Void.class, null);
     wsLogger.logResponse(null);
     return response;
-  }
-
-  @PayloadRoot(namespace = "http://schemas.consiliumtechnologies.com/services/mobile/2009/03/messaging", localPart = "request")
-  @ResponsePayload
-  public JAXBElement<Void> request(@RequestPayload JAXBElement<WebServiceAdapterOutputRequest> request) {
-    return sendAdapterOutput(request);
   }
 }
