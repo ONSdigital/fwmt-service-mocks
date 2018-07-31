@@ -19,7 +19,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/fieldPeriods")
+@RequestMapping("/resources/fieldPeriods")
 public class FieldPeriodController {
 
   @GetMapping(produces = "application/json")

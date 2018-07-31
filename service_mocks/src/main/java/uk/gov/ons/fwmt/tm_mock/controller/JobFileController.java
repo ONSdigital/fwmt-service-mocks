@@ -26,7 +26,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/jobFile")
+@RequestMapping("/resources/jobFile")
 public class JobFileController {
 
   @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json")

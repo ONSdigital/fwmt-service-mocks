@@ -19,7 +19,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/resources/users")
 public class UserController {
 
   @GetMapping(produces = "application/json")
