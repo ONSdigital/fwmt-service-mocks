@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.tm_mock.dto;
+package uk.gov.ons.fwmt.service_mocks.resource_service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.service_mocks.ws;
+package uk.gov.ons.fwmt.service_mocks.tm.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -26,7 +26,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     MessageDispatcherServlet servlet = new MessageDispatcherServlet();
     servlet.setApplicationContext(applicationContext);
     servlet.setTransformWsdlLocations(true);
-    return new ServletRegistrationBean(servlet, "/Services/TM/v20/Messaging/*");
+    return new ServletRegistrationBean(servlet, "/tm/Services/TM/v20/Messaging/*");
   }
 
   @Override

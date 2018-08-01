@@ -1,12 +1,12 @@
-package uk.gov.ons.fwmt.service_mocks.ws;
+package uk.gov.ons.fwmt.service_mocks.tm.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.soap.SoapHeaderElement;
 import org.springframework.ws.soap.server.SoapEndpointInterceptor;
-import uk.gov.ons.fwmt.service_mocks.logging.WsLogger;
-import uk.gov.ons.fwmt.service_mocks.logging.WsMessage;
+import uk.gov.ons.fwmt.service_mocks.tm.logging.WsLogger;
+import uk.gov.ons.fwmt.service_mocks.tm.logging.WsMessage;
 
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
