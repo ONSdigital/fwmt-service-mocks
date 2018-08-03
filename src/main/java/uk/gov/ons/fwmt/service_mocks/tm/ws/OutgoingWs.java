@@ -13,7 +13,7 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import uk.gov.ons.fwmt.service_mocks.tm.logging.WsLogger;
+import uk.gov.ons.fwmt.service_mocks.logging.MockLogger;
 
 import javax.xml.bind.JAXBElement;
 
@@ -23,15 +23,15 @@ public class OutgoingWs {
   private static final String NAMESPACE_URI = "http://schemas.consiliumtechnologies.com/services/mobile/2009/03/messaging";
 
   @Autowired
-  WsLogger wsLogger;
+  MockLogger mockLogger;
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateVisitStatusRequest")
   @ResponsePayload
   public void sendUpdateVisitStatusRequestOutput(
       @RequestPayload JAXBElement<UpdateVisitStatusRequest> request) {
-    wsLogger.logEndpoint("SendMessage");
-    wsLogger.logRequest(request.getValue());
-    wsLogger.logResponse(null);
+    mockLogger.logEndpoint("SendMessage");
+    mockLogger.logParsedRequest(request.getValue());
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "completeVisitRequest")
@@ -40,53 +40,53 @@ public class OutgoingWs {
   // http://forum.spring.io/forum/spring-projects/web-services/42740-responding-with-an-empty-soap-body
   public void sendCompleteVisitStatusRequestOutputLowercase(
       @RequestPayload JAXBElement<CompleteVisitRequest> request) {
-    wsLogger.logEndpoint("SendCompleteVisitStatusRequestOutput");
-    wsLogger.logRequest(request);
-    wsLogger.logResponse(null);
+    mockLogger.logEndpoint("SendCompleteVisitStatusRequestOutput");
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "requestVisitRequest")
   @ResponsePayload
   public void sendRequestVisitRequestOutput(
       @RequestPayload JAXBElement<RequestVisitRequest> request) {
-    wsLogger.logEndpoint("SendRequestVisitRequestOutput");
-    wsLogger.logRequest(request);
-    wsLogger.logResponse(null);
+    mockLogger.logEndpoint("SendRequestVisitRequestOutput");
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "submitDocumentRequest")
   @ResponsePayload
   public void sendSubmitDocumentRequestOutput(
       @RequestPayload JAXBElement<SubmitDocumentRequest> request) {
-    wsLogger.logEndpoint("SendSubmitDocumentRequestOutput");
-    wsLogger.logRequest(request);
-    wsLogger.logResponse(null);
+    mockLogger.logEndpoint("SendSubmitDocumentRequestOutput");
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "compositeVisitRequest")
   @ResponsePayload
   public void sendCompositeVisitRequestOutput(
       @RequestPayload JAXBElement<CompositeVisitRequest> request) {
-    wsLogger.logEndpoint("SendCompositeVisitRequestOutput");
-    wsLogger.logRequest(request);
-    wsLogger.logResponse(null);
+    mockLogger.logEndpoint("SendCompositeVisitRequestOutput");
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "submitFormResultRequest")
   @ResponsePayload
   public void sendSubmitFormResultRequestOutput(
       @RequestPayload JAXBElement<SubmitFormResultRequest> request) {
-    wsLogger.logEndpoint("SendSubmitFormResultRequestOutput");
-    wsLogger.logRequest(request);
-    wsLogger.logResponse(null);
+    mockLogger.logEndpoint("SendSubmitFormResultRequestOutput");
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "submitLocationRequest")
   @ResponsePayload
   public void sendSubmitLocationRequestOutput(
       @RequestPayload JAXBElement<SubmitLocationRequest> request) {
-    wsLogger.logEndpoint("SendSubmitLocationRequestOutput");
-    wsLogger.logRequest(request);
-    wsLogger.logResponse(null);
+    mockLogger.logEndpoint("SendSubmitLocationRequestOutput");
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 }

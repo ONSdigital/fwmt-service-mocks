@@ -12,6 +12,7 @@ import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
 import org.springframework.ws.wsdl.wsdl11.Wsdl11Definition;
+import uk.gov.ons.fwmt.service_mocks.logging.RawXmlInterceptor;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     MessageDispatcherServlet servlet = new MessageDispatcherServlet();
     servlet.setApplicationContext(applicationContext);
     servlet.setTransformWsdlLocations(true);
-    return new ServletRegistrationBean(servlet, "/tm/Services/TM/v20/Messaging/*");
+    return new ServletRegistrationBean(servlet, "/Dev/tm/Services/TM/v20/Messaging/*");
   }
 
   @Override

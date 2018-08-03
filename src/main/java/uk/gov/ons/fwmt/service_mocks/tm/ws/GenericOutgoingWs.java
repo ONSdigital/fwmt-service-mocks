@@ -7,7 +7,7 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import uk.gov.ons.fwmt.service_mocks.tm.logging.WsLogger;
+import uk.gov.ons.fwmt.service_mocks.logging.MockLogger;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
@@ -16,22 +16,21 @@ import javax.xml.namespace.QName;
 @Endpoint
 public class GenericOutgoingWs {
   @Autowired
-  WsLogger wsLogger;
+  MockLogger mockLogger;
 
   // Ideally, the method signature would be as below
   // Spring does not appear to respect SOAPAction
   // Therefore, a alternative signature is used
-  // TODO fix this
+  // TODO fix the signature of the GenericOutgoingWs:sendAdapterOutput method
   //  @PayloadRoot(namespace = "http://schemas.consiliumtechnologies.com/services/mobile/2007/07/messaging", localPart = "SendAdapterOutput")
   //  @ResponsePayload
   //  public JAXBElement<Void> sendAdapterOutput(@RequestPayload JAXBElement<WebServiceAdapterOutputRequest> request) {
   @PayloadRoot(namespace = "http://schemas.consiliumtechnologies.com/services/mobile/2009/03/messaging", localPart = "request")
   @ResponsePayload
   public JAXBElement<Void> sendAdapterOutput(@RequestPayload JAXBElement<WebServiceAdapterOutputRequest> request) {
-    wsLogger.logEndpoint("SendMessage");
-    wsLogger.logRequest(request.getValue());
+    mockLogger.logParsedRequest(request.getValue());
     JAXBElement<Void> response = new JAXBElement<>(new QName(null, "null"), Void.class, null);
-    wsLogger.logResponse(null);
+    mockLogger.logParsedResponse(response);
     return response;
   }
 }
