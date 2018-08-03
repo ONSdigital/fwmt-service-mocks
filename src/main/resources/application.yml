@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: fwmt-service-mock-tm
+    name: fwmt-service-mocks
 
 management.endpoint.health.show-details: always
 

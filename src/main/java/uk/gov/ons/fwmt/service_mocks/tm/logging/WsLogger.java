@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.service_mocks.logging;
+package uk.gov.ons.fwmt.service_mocks.tm.logging;
 
 import org.springframework.stereotype.Component;
 

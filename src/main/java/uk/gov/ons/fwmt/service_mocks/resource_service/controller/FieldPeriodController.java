@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.tm_mock.controller;
+package uk.gov.ons.fwmt.service_mocks.resource_service.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uk.gov.ons.fwmt.tm_mock.dto.FieldPeriodDTO;
+import uk.gov.ons.fwmt.service_mocks.resource_service.dto.FieldPeriodDTO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

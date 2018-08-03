@@ -1,8 +1,7 @@
-package uk.gov.ons.fwmt.tm_mock.controller;
+package uk.gov.ons.fwmt.service_mocks.resource_service.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,15 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import uk.gov.ons.fwmt.tm_mock.dto.JobFileDTO;
+import uk.gov.ons.fwmt.service_mocks.resource_service.dto.JobFileDTO;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
-import java.util.Optional;
-
 
 @Slf4j
 @RestController
