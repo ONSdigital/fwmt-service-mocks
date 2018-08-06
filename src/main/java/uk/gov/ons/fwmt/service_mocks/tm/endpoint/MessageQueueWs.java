@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.service_mocks.tm.ws;
+package uk.gov.ons.fwmt.service_mocks.tm.endpoint;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +60,7 @@ import com.consiliumtechnologies.schemas.services.mobile._2009._03.messaging.Tra
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import uk.gov.ons.fwmt.service_mocks.tm.logging.WsLogger;
+import uk.gov.ons.fwmt.service_mocks.logging.MockLogger;
 
 import javax.xml.bind.JAXBElement;
 
@@ -72,17 +72,17 @@ public class MessageQueueWs {
   private ObjectFactory objectFactory = new ObjectFactory();
 
   @Autowired
-  private WsLogger wsLogger;
+  private MockLogger mockLogger;
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SendMessageRequest")
   @ResponsePayload
   public JAXBElement<SendMessageResponse> sendMessage(@RequestPayload JAXBElement<SendMessageRequest> request) {
-    wsLogger.logEndpoint("SendMessage");
-    wsLogger.logRequest(request.getValue());
+    mockLogger.logEndpoint("SendMessage");
+    mockLogger.logRequest(request.getValue());
 
     SendMessageResponse response = new SendMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return objectFactory.createSendMessageResponse(response);
   }
 
@@ -90,72 +90,72 @@ public class MessageQueueWs {
   @ResponsePayload
   public JAXBElement<TransformAndSendResponse> transformAndSendMessage(
       @RequestPayload JAXBElement<TransformAndSendRequest> request) {
-    wsLogger.logEndpoint("TransformAndSendMessage");
-    wsLogger.logRequest(request.getValue());
+    mockLogger.logEndpoint("TransformAndSendMessage");
+    mockLogger.logRequest(request.getValue());
 
     TransformAndSendResponse response = new TransformAndSendResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return objectFactory.createTransformAndSendResponse(response);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "QueryMessagesRequest")
   @ResponsePayload
   public JAXBElement<QueryMessagesResponse> query(@RequestPayload JAXBElement<QueryMessagesRequest> request) {
-    wsLogger.logEndpoint("Query");
-    wsLogger.logRequest(request.getValue());
+    mockLogger.logEndpoint("Query");
+    mockLogger.logRequest(request.getValue());
 
     QueryMessagesResponse response = new QueryMessagesResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return objectFactory.createQueryMessagesResponse(response);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetMessageRequest")
   @ResponsePayload
   public JAXBElement<GetMessageResponse> get(@RequestPayload JAXBElement<GetMessageRequest> request) {
-    wsLogger.logEndpoint("Get");
-    wsLogger.logRequest(request.getValue());
+    mockLogger.logEndpoint("Get");
+    mockLogger.logRequest(request.getValue());
 
     GetMessageResponse response = new GetMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return objectFactory.createGetMessageResponse(response);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteMessageRequest")
   @ResponsePayload
   public JAXBElement<DeleteMessageResponse> delete(@RequestPayload JAXBElement<DeleteMessageRequest> request) {
-    wsLogger.logEndpoint("Delete");
-    wsLogger.logRequest(request.getValue());
+    mockLogger.logEndpoint("Delete");
+    mockLogger.logRequest(request.getValue());
 
     DeleteMessageResponse response = new DeleteMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return objectFactory.createDeleteMessageResponse(response);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "RetryMessageRequest")
   @ResponsePayload
   public JAXBElement<RetryMessageResponse> retry(@RequestPayload JAXBElement<RetryMessageRequest> request) {
-    wsLogger.logEndpoint("Retry");
-    wsLogger.logRequest(request.getValue());
+    mockLogger.logEndpoint("Retry");
+    mockLogger.logRequest(request.getValue());
 
     RetryMessageResponse response = new RetryMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return objectFactory.createRetryMessageResponse(response);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ResetMessageRequest")
   @ResponsePayload
   public JAXBElement<ResetMessageResponse> reset(@RequestPayload JAXBElement<ResetMessageRequest> request) {
-    wsLogger.logEndpoint("Reset");
-    wsLogger.logRequest(request.getValue());
+    mockLogger.logEndpoint("Reset");
+    mockLogger.logRequest(request.getValue());
 
     ResetMessageResponse response = new ResetMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return objectFactory.createResetMessageResponse(response);
   }
 
@@ -163,12 +163,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendCreateVisitRequestMessageResponse sendCreateVisitRequestMessage(
       @RequestPayload SendCreateVisitRequestMessage request) {
-    wsLogger.logEndpoint("SendCreateVisitRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendCreateVisitRequestMessage");
+    mockLogger.logRequest(request);
 
     SendCreateVisitRequestMessageResponse response = new SendCreateVisitRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -176,12 +176,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendForceRecallVisitRequestMessageResponse sendForceRecallVisitRequestMessage(
       @RequestPayload SendForceRecallVisitRequestMessage request) {
-    wsLogger.logEndpoint("SendForceRecallVisitRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendForceRecallVisitRequestMessage");
+    mockLogger.logRequest(request);
 
     SendForceRecallVisitRequestMessageResponse response = new SendForceRecallVisitRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -189,12 +189,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendAddVisitTasksRequestMessageResponse sendAddVisitTasksRequestMessage(
       @RequestPayload SendAddVisitTasksRequestMessage request) {
-    wsLogger.logEndpoint("SendAddVisitTasksRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendAddVisitTasksRequestMessage");
+    mockLogger.logRequest(request);
 
     SendAddVisitTasksRequestMessageResponse response = new SendAddVisitTasksRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -202,12 +202,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendUpdateVisitScheduleRequestMessageResponse sendUpdateVisitScheduleRequestMessage(
       @RequestPayload SendUpdateVisitScheduleRequestMessage request) {
-    wsLogger.logEndpoint("SendUpdateVisitScheduleRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendUpdateVisitScheduleRequestMessage");
+    mockLogger.logRequest(request);
 
     SendUpdateVisitScheduleRequestMessageResponse response = new SendUpdateVisitScheduleRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -215,12 +215,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendUpdateVisitHeaderRequestMessageResponse sendUpdateVisitHeaderRequestMessage(
       @RequestPayload SendUpdateVisitHeaderRequestMessage request) {
-    wsLogger.logEndpoint("SendUpdateVisitHeaderRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendUpdateVisitHeaderRequestMessage");
+    mockLogger.logRequest(request);
 
     SendUpdateVisitHeaderRequestMessageResponse response = new SendUpdateVisitHeaderRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -228,12 +228,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendCreateBulletinRequestMessageResponse sendCreateBulletinRequestMessage(
       @RequestPayload SendCreateBulletinRequestMessage request) {
-    wsLogger.logEndpoint("SendCreateBulletinRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendCreateBulletinRequestMessage");
+    mockLogger.logRequest(request);
 
     SendCreateBulletinRequestMessageResponse response = new SendCreateBulletinRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -241,12 +241,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendDeleteBulletinRequestMessageResponse sendDeleteBulletinRequestMessage(
       @RequestPayload SendDeleteBulletinRequestMessage request) {
-    wsLogger.logEndpoint("SendDeleteBulletinRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendDeleteBulletinRequestMessage");
+    mockLogger.logRequest(request);
 
     SendDeleteBulletinRequestMessageResponse response = new SendDeleteBulletinRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -254,12 +254,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendGenerateFolioContentRequestMessageResponse sendGenerateFolioContentRequestMessage(
       @RequestPayload SendGenerateFolioContentRequestMessage request) {
-    wsLogger.logEndpoint("SendGenerateFolioContentRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendGenerateFolioContentRequestMessage");
+    mockLogger.logRequest(request);
 
     SendGenerateFolioContentRequestMessageResponse response = new SendGenerateFolioContentRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -267,12 +267,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendAddFolioContentRequestMessageResponse sendAddFolioContentRequestMessage(
       @RequestPayload SendAddFolioContentRequestMessage request) {
-    wsLogger.logEndpoint("SendAddFolioContentRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendAddFolioContentRequestMessage");
+    mockLogger.logRequest(request);
 
     SendAddFolioContentRequestMessageResponse response = new SendAddFolioContentRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -280,12 +280,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendCreateReferralRequestMessageResponse sendCreateReferralRequestMessage(
       @RequestPayload SendCreateReferralRequestMessage request) {
-    wsLogger.logEndpoint("SendCreateReferralRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendCreateReferralRequestMessage");
+    mockLogger.logRequest(request);
 
     SendCreateReferralRequestMessageResponse response = new SendCreateReferralRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -293,12 +293,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendCreatePatientRequestMessageResponse sendCreatePatientRequestMessage(
       @RequestPayload SendCreatePatientRequestMessage request) {
-    wsLogger.logEndpoint("SendCreatePatientRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendCreatePatientRequestMessage");
+    mockLogger.logRequest(request);
 
     SendCreatePatientRequestMessageResponse response = new SendCreatePatientRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -306,12 +306,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendUpdateReferralRequestMessageResponse sendUpdateReferralRequestMessage(
       @RequestPayload SendUpdateReferralRequestMessage request) {
-    wsLogger.logEndpoint("SendUpdateReferralRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendUpdateReferralRequestMessage");
+    mockLogger.logRequest(request);
 
     SendUpdateReferralRequestMessageResponse response = new SendUpdateReferralRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -319,12 +319,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendCreateAppointmentRequestMessageResponse sendCreateAppointmentRequestMessage(
       @RequestPayload SendCreateAppointmentRequestMessage request) {
-    wsLogger.logEndpoint("SendCreateAppointmentRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendCreateAppointmentRequestMessage");
+    mockLogger.logRequest(request);
 
     SendCreateAppointmentRequestMessageResponse response = new SendCreateAppointmentRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -332,12 +332,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendDischargeReferralRequestMessageResponse sendDischargeReferralRequestMessage(
       @RequestPayload SendDischargeReferralRequestMessage request) {
-    wsLogger.logEndpoint("SendDischargeReferralRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendDischargeReferralRequestMessage");
+    mockLogger.logRequest(request);
 
     SendDischargeReferralRequestMessageResponse response = new SendDischargeReferralRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -345,12 +345,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendCreateJobRequestMessageResponse sendCreateJobRequestMessage(
       @RequestPayload SendCreateJobRequestMessage request) {
-    wsLogger.logEndpoint("SendCreateJobRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendCreateJobRequestMessage");
+    mockLogger.logRequest(request);
 
     SendCreateJobRequestMessageResponse response = new SendCreateJobRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -358,12 +358,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendDeleteJobRequestMessageResponse sendDeleteJobRequestMessage(
       @RequestPayload SendDeleteJobRequestMessage request) {
-    wsLogger.logEndpoint("SendDeleteJobRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendDeleteJobRequestMessage");
+    mockLogger.logRequest(request);
 
     SendDeleteJobRequestMessageResponse response = new SendDeleteJobRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -371,12 +371,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendAddJobTasksRequestMessageResponse sendAddJobTasksRequestMessage(
       @RequestPayload SendAddJobTasksRequestMessage request) {
-    wsLogger.logEndpoint("SendAddJobTasksRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendAddJobTasksRequestMessage");
+    mockLogger.logRequest(request);
 
     SendAddJobTasksRequestMessageResponse response = new SendAddJobTasksRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -384,12 +384,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendSaveAvailabilityRequestMessageResponse sendSaveAvailabilityRequestMessage(
       @RequestPayload SendSaveAvailabilityRequestMessage request) {
-    wsLogger.logEndpoint("SendSaveAvailabilityRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendSaveAvailabilityRequestMessage");
+    mockLogger.logRequest(request);
 
     SendSaveAvailabilityRequestMessageResponse response = new SendSaveAvailabilityRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 
@@ -397,12 +397,12 @@ public class MessageQueueWs {
   @ResponsePayload
   public SendUpdateJobHeaderRequestMessageResponse sendUpdateJobHeaderRequestMessage(
       @RequestPayload SendUpdateJobHeaderRequestMessage request) {
-    wsLogger.logEndpoint("SendUpdateJobHeaderRequestMessage");
-    wsLogger.logRequest(request);
+    mockLogger.logEndpoint("SendUpdateJobHeaderRequestMessage");
+    mockLogger.logRequest(request);
 
     SendUpdateJobHeaderRequestMessageResponse response = new SendUpdateJobHeaderRequestMessageResponse();
 
-    wsLogger.logResponse(response);
+    mockLogger.logResponse(response);
     return response;
   }
 }

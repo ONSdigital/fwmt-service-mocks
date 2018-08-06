@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.service_mocks.tm.logging;
+package uk.gov.ons.fwmt.service_mocks.logging;
 
 import org.springframework.stereotype.Component;
 
@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class WsLogger {
-  public ThreadLocal<WsMessage> currentMessage = new ThreadLocal<>();
+public class MockLogger {
+  public ThreadLocal<MockMessage> currentMessage = new ThreadLocal<>();
 
-  public List<WsMessage> messages = new ArrayList<>();
+  public List<MockMessage> messages = new ArrayList<>();
 
-  public void logWsMessage(WsMessage message) {
+  public void logWsMessage(MockMessage message) {
     messages.add(message);
   }
 

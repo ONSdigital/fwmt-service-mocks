@@ -1,5 +1,4 @@
 server:
-  contextPath: /Dev
   port: 9099
 
 spring:

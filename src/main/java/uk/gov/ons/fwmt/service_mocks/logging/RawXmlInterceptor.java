@@ -1,30 +1,30 @@
-package uk.gov.ons.fwmt.service_mocks.tm.ws;
+package uk.gov.ons.fwmt.service_mocks.logging;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.soap.SoapHeaderElement;
 import org.springframework.ws.soap.server.SoapEndpointInterceptor;
-import uk.gov.ons.fwmt.service_mocks.tm.logging.WsLogger;
-import uk.gov.ons.fwmt.service_mocks.tm.logging.WsMessage;
+import uk.gov.ons.fwmt.service_mocks.logging.MockLogger;
+import uk.gov.ons.fwmt.service_mocks.logging.MockMessage;
 
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
 
 @Component
 public class RawXmlInterceptor implements SoapEndpointInterceptor {
-  @Autowired private WsLogger wsLogger;
+  @Autowired private MockLogger mockLogger;
 
   private void setupCurrentMessage() {
-    if (wsLogger.currentMessage.get() == null) {
-      WsMessage message = new WsMessage();
-      wsLogger.currentMessage.set(message);
-      wsLogger.logWsMessage(message);
+    if (mockLogger.currentMessage.get() == null) {
+      MockMessage message = new MockMessage();
+      mockLogger.currentMessage.set(message);
+      mockLogger.logWsMessage(message);
     }
   }
 
   private void tearDownCurrentMessage() {
-    wsLogger.currentMessage.remove();
+    mockLogger.currentMessage.remove();
   }
 
   @Override public boolean understands(SoapHeaderElement header) {
@@ -35,8 +35,8 @@ public class RawXmlInterceptor implements SoapEndpointInterceptor {
     setupCurrentMessage();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     messageContext.getRequest().writeTo(outputStream);
-    wsLogger.currentMessage.get().requestRawHtml = outputStream.toString();
-    wsLogger.currentMessage.get().requestTimestamp = LocalDateTime.now();
+    mockLogger.currentMessage.get().requestRawHtml = outputStream.toString();
+    mockLogger.currentMessage.get().requestTimestamp = LocalDateTime.now();
     return true;
   }
 
@@ -44,8 +44,8 @@ public class RawXmlInterceptor implements SoapEndpointInterceptor {
     setupCurrentMessage();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     messageContext.getResponse().writeTo(outputStream);
-    wsLogger.currentMessage.get().responseRawHtml = outputStream.toString();
-    wsLogger.currentMessage.get().responseTimestamp = LocalDateTime.now();
+    mockLogger.currentMessage.get().responseRawHtml = outputStream.toString();
+    mockLogger.currentMessage.get().responseTimestamp = LocalDateTime.now();
     return true;
   }
 
@@ -53,8 +53,8 @@ public class RawXmlInterceptor implements SoapEndpointInterceptor {
     setupCurrentMessage();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     messageContext.getResponse().writeTo(outputStream);
-    wsLogger.currentMessage.get().faultRawHtml = outputStream.toString();
-    wsLogger.currentMessage.get().faultTimestamp = LocalDateTime.now();
+    mockLogger.currentMessage.get().faultRawHtml = outputStream.toString();
+    mockLogger.currentMessage.get().faultTimestamp = LocalDateTime.now();
     return true;
   }
 
