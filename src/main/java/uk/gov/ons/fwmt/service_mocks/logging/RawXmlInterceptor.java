@@ -15,50 +15,32 @@ import java.time.LocalDateTime;
 public class RawXmlInterceptor implements SoapEndpointInterceptor {
   @Autowired private MockLogger mockLogger;
 
-  private void setupCurrentMessage() {
-    if (mockLogger.currentMessage.get() == null) {
-      MockMessage message = new MockMessage();
-      mockLogger.currentMessage.set(message);
-      mockLogger.logWsMessage(message);
-    }
-  }
-
-  private void tearDownCurrentMessage() {
-    mockLogger.currentMessage.remove();
-  }
-
   @Override public boolean understands(SoapHeaderElement header) {
     return true;
   }
 
   @Override public boolean handleRequest(MessageContext messageContext, Object endpoint) throws Exception {
-    setupCurrentMessage();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     messageContext.getRequest().writeTo(outputStream);
-    mockLogger.currentMessage.get().requestRawHtml = outputStream.toString();
-    mockLogger.currentMessage.get().requestTimestamp = LocalDateTime.now();
+    mockLogger.logRawRequest(null, outputStream.toString());
     return true;
   }
 
   @Override public boolean handleResponse(MessageContext messageContext, Object endpoint) throws Exception {
-    setupCurrentMessage();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     messageContext.getResponse().writeTo(outputStream);
-    mockLogger.currentMessage.get().responseRawHtml = outputStream.toString();
-    mockLogger.currentMessage.get().responseTimestamp = LocalDateTime.now();
+    mockLogger.logRawResponse(null, outputStream.toString());
     return true;
   }
 
   @Override public boolean handleFault(MessageContext messageContext, Object endpoint) throws Exception {
-    setupCurrentMessage();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     messageContext.getResponse().writeTo(outputStream);
-    mockLogger.currentMessage.get().faultRawHtml = outputStream.toString();
-    mockLogger.currentMessage.get().faultTimestamp = LocalDateTime.now();
+    mockLogger.logRawFault(null, outputStream.toString());
     return true;
   }
 
   @Override public void afterCompletion(MessageContext messageContext, Object endpoint, Exception ex) {
-    tearDownCurrentMessage();
+    mockLogger.finalise();
   }
 }

@@ -21,11 +21,18 @@ public class MockLoggerController {
 
   @GetMapping(value = "allMessages", produces = "application/json")
   public List<MockMessage> getAllMessages() {
-    return mockLogger.messages;
+    return mockLogger.getAllMessages();
   }
 
   @GetMapping(value = "faultCount", produces = "application/json")
   public int getFaultCount() {
-    return (int) (mockLogger.messages.stream().filter(m -> m.faultTimestamp != null).count());
+    return mockLogger.getFaultCount();
   }
+
+  @GetMapping(value = "reset")
+  public void reset() {
+    mockLogger.reset();
+  }
+
+
 }

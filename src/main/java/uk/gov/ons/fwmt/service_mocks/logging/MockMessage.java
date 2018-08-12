@@ -1,10 +1,12 @@
 package uk.gov.ons.fwmt.service_mocks.logging;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
 public class MockMessage {
 
   public String endpoint;
@@ -18,8 +20,6 @@ public class MockMessage {
   public String responseRawHeaders;
   public String responseRawHtml;
   public Object responseMessageParsed;
-
-  public LocalDateTime faultTimestamp;
-  public String faultRawHtml;
+  public boolean isFault;
 
 }

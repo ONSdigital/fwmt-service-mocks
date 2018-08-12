@@ -29,9 +29,9 @@ public class GenericOutgoingWs {
   @ResponsePayload
   public JAXBElement<Void> sendAdapterOutput(@RequestPayload JAXBElement<WebServiceAdapterOutputRequest> request) {
     mockLogger.logEndpoint("SendMessage");
-    mockLogger.logRequest(request.getValue());
+    mockLogger.logParsedRequest(request.getValue());
     JAXBElement<Void> response = new JAXBElement<>(new QName(null, "null"), Void.class, null);
-    mockLogger.logResponse(null);
+    mockLogger.logParsedResponse(null);
     return response;
   }
 }

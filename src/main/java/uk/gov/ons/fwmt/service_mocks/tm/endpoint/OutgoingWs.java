@@ -30,8 +30,8 @@ public class OutgoingWs {
   public void sendUpdateVisitStatusRequestOutput(
       @RequestPayload JAXBElement<UpdateVisitStatusRequest> request) {
     mockLogger.logEndpoint("SendMessage");
-    mockLogger.logRequest(request.getValue());
-    mockLogger.logResponse(null);
+    mockLogger.logParsedRequest(request.getValue());
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "completeVisitRequest")
@@ -41,8 +41,8 @@ public class OutgoingWs {
   public void sendCompleteVisitStatusRequestOutputLowercase(
       @RequestPayload JAXBElement<CompleteVisitRequest> request) {
     mockLogger.logEndpoint("SendCompleteVisitStatusRequestOutput");
-    mockLogger.logRequest(request);
-    mockLogger.logResponse(null);
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "requestVisitRequest")
@@ -50,8 +50,8 @@ public class OutgoingWs {
   public void sendRequestVisitRequestOutput(
       @RequestPayload JAXBElement<RequestVisitRequest> request) {
     mockLogger.logEndpoint("SendRequestVisitRequestOutput");
-    mockLogger.logRequest(request);
-    mockLogger.logResponse(null);
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "submitDocumentRequest")
@@ -59,8 +59,8 @@ public class OutgoingWs {
   public void sendSubmitDocumentRequestOutput(
       @RequestPayload JAXBElement<SubmitDocumentRequest> request) {
     mockLogger.logEndpoint("SendSubmitDocumentRequestOutput");
-    mockLogger.logRequest(request);
-    mockLogger.logResponse(null);
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "compositeVisitRequest")
@@ -68,8 +68,8 @@ public class OutgoingWs {
   public void sendCompositeVisitRequestOutput(
       @RequestPayload JAXBElement<CompositeVisitRequest> request) {
     mockLogger.logEndpoint("SendCompositeVisitRequestOutput");
-    mockLogger.logRequest(request);
-    mockLogger.logResponse(null);
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "submitFormResultRequest")
@@ -77,8 +77,8 @@ public class OutgoingWs {
   public void sendSubmitFormResultRequestOutput(
       @RequestPayload JAXBElement<SubmitFormResultRequest> request) {
     mockLogger.logEndpoint("SendSubmitFormResultRequestOutput");
-    mockLogger.logRequest(request);
-    mockLogger.logResponse(null);
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 
   @PayloadRoot(namespace = NAMESPACE_URI, localPart = "submitLocationRequest")
@@ -86,7 +86,7 @@ public class OutgoingWs {
   public void sendSubmitLocationRequestOutput(
       @RequestPayload JAXBElement<SubmitLocationRequest> request) {
     mockLogger.logEndpoint("SendSubmitLocationRequestOutput");
-    mockLogger.logRequest(request);
-    mockLogger.logResponse(null);
+    mockLogger.logParsedRequest(request);
+    mockLogger.logParsedResponse(null);
   }
 }
