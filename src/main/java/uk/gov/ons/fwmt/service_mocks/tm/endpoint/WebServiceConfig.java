@@ -27,7 +27,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     MessageDispatcherServlet servlet = new MessageDispatcherServlet();
     servlet.setApplicationContext(applicationContext);
     servlet.setTransformWsdlLocations(true);
-    return new ServletRegistrationBean(servlet, "/Dev/tm/Services/TM/v20/Messaging/*");
+    return new ServletRegistrationBean(servlet, "/Mock/tm/Services/TM/v20/Messaging/*");
   }
 
   @Override

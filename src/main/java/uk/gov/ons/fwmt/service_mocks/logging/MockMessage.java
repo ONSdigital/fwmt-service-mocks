@@ -1,11 +1,14 @@
-package uk.gov.ons.fwmt.service_mocks.logging;
+package uk.gov.ons.fwmt.service_mocks.tm.logging;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
 public class MockMessage {
+
   public String endpoint;
 
   // request
@@ -19,8 +22,6 @@ public class MockMessage {
   public String responseRawHeaders;
   public String responseRawHtml;
   public Object responseMessageParsed;
-  public boolean faulted;
+  public boolean isFault;
 
-  // verification information
-  public boolean verified;
 }

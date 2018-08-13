@@ -46,13 +46,13 @@ public class UserController {
 
   @GetMapping(value = "/auth/{authNo}", produces = "application/json")
   public ResponseEntity<UserDTO> getUserByAuthNo(@PathVariable("authNo") String authNo) {
-    UserDTO result = new UserDTO(authNo,"John.Smith",false,"");
+    UserDTO result = new UserDTO(authNo,"John.Smith",true,"");
     return ResponseEntity.ok(result);
   }
 
   @GetMapping(value = "/alternative/{altAuthNo}", produces = "application/json")
   public ResponseEntity<UserDTO> getUserByAltAuthNo(@PathVariable("altAuthNo") String altAuthNo){
-    UserDTO result = new UserDTO("1234","John.Smith",false,altAuthNo);
+    UserDTO result = new UserDTO("1234","John.Smith",true, altAuthNo);
     return ResponseEntity.ok(result);
   }
 

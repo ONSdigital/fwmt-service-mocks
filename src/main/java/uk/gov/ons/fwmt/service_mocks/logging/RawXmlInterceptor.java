@@ -1,10 +1,12 @@
-package uk.gov.ons.fwmt.service_mocks.logging;
+package uk.gov.ons.fwmt.service_mocks.tm.ws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.soap.SoapHeaderElement;
 import org.springframework.ws.soap.server.SoapEndpointInterceptor;
+import uk.gov.ons.fwmt.service_mocks.logging.MockLogger;
+import uk.gov.ons.fwmt.service_mocks.logging.MockMessage;
 
 import java.io.ByteArrayOutputStream;
 
@@ -17,7 +19,6 @@ public class RawXmlInterceptor implements SoapEndpointInterceptor {
   }
 
   @Override public boolean handleRequest(MessageContext messageContext, Object endpoint) throws Exception {
-    mockLogger.setupCurrentMessage();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     messageContext.getRequest().writeTo(outputStream);
     mockLogger.logRawRequest(null, outputStream.toString());
@@ -39,6 +40,6 @@ public class RawXmlInterceptor implements SoapEndpointInterceptor {
   }
 
   @Override public void afterCompletion(MessageContext messageContext, Object endpoint, Exception ex) {
-    mockLogger.tearDownCurrentMessage();
+    mockLogger.finalise();
   }
 }

@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import uk.gov.ons.fwmt.service_mocks.logging.MockLogger;
+import uk.gov.ons.fwmt.service_mocks.logging.MockMessage;
+
 @RestController
 @RequestMapping("monitor")
 public class MockLoggerController {
@@ -21,19 +24,18 @@ public class MockLoggerController {
 
   @GetMapping(value = "allMessages", produces = "application/json")
   public List<MockMessage> getAllMessages() {
-    return mockLogger.messages;
-  }
-
-  @GetMapping(value = "allMessagesAfterTimestamp", produces = "application/json")
-  public List<MockMessage> getAllMessagesAfterTimestamp(LocalDateTime time) {
-    return mockLogger.messages.stream()
-        .filter(m -> time.isBefore(m.getRequestTimestamp()) || time.isBefore(m.getResponseTimestamp()))
-        .collect(Collectors.toList());
+    return mockLogger.getAllMessages();
   }
 
   @GetMapping(value = "faultCount", produces = "application/json")
   public int getFaultCount() {
-    return (int) (mockLogger.messages.stream().filter(m -> m.faulted).count());
+    return mockLogger.getFaultCount();
   }
+
+  @GetMapping(value = "reset")
+  public void reset() {
+    mockLogger.reset();
+  }
+
 
 }

@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.service_mocks.tm.ws;
+package uk.gov.ons.fwmt.service_mocks.tm.endpoint;
 
 import com.consiliumtechnologies.schemas.mobile._2008._10.locationmessages.SubmitLocationRequest;
 import com.consiliumtechnologies.schemas.mobile._2009._03.commonmessages.SubmitDocumentRequest;

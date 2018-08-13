@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.service_mocks.tm.ws;
+package uk.gov.ons.fwmt.service_mocks.tm.endpoint;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
