@@ -3,7 +3,6 @@ package uk.gov.ons.fwmt.service_mocks.logging;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
@@ -14,7 +13,7 @@ public class MockLogger {
 
   private List<MockMessage> messages = new Vector<>();
 
-  // methods for mock_logging
+  // methods for mock logging
 
   private void setupCurrentMessage() {
     if (currentMessage.get() == null) {

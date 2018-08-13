@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.service_mocks.tm.ws;
+package uk.gov.ons.fwmt.service_mocks.logging;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
