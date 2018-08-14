@@ -15,18 +15,30 @@ import uk.gov.ons.fwmt.service_mocks.resource_service.dto.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
 @RequestMapping("/resources/users")
 public class UserController {
 
+  private List<UserDTO> validUsers = new ArrayList<>();
+
+  public UserController() {
+    validUsers.add(new UserDTO(
+        "1234", "user_1", true, null
+    ));
+    validUsers.add(new UserDTO(
+        "1111", "user_2", true, null
+    ));
+    validUsers.add(new UserDTO(
+        "9999", "user_3", true, null
+    ));
+  }
+
   @GetMapping(produces = "application/json")
   public ResponseEntity<List<UserDTO>> getUsers() {
-    UserDTO user = new UserDTO("1234","John.Smith",false,"");
-    List<UserDTO> result = new ArrayList<>();
-    result.add(user);
-    return ResponseEntity.ok(result);
+    return ResponseEntity.ok(validUsers);
   }
 
   @PostMapping(consumes = "application/json", produces = "application/json")
@@ -46,14 +58,23 @@ public class UserController {
 
   @GetMapping(value = "/auth/{authNo}", produces = "application/json")
   public ResponseEntity<UserDTO> getUserByAuthNo(@PathVariable("authNo") String authNo) {
-    UserDTO result = new UserDTO(authNo,"John.Smith",true,"");
-    return ResponseEntity.ok(result);
+    Optional<UserDTO> match = validUsers.stream().filter(dto -> dto.getAuthNo().equalsIgnoreCase(authNo)).findFirst();
+    if (match.isPresent()) {
+      return ResponseEntity.ok(match.get());
+    } else {
+      return ResponseEntity.notFound().build();
+    }
   }
 
   @GetMapping(value = "/alternative/{altAuthNo}", produces = "application/json")
-  public ResponseEntity<UserDTO> getUserByAltAuthNo(@PathVariable("altAuthNo") String altAuthNo){
-    UserDTO result = new UserDTO("1234","John.Smith",true, altAuthNo);
-    return ResponseEntity.ok(result);
+  public ResponseEntity<UserDTO> getUserByAltAuthNo(@PathVariable("altAuthNo") String altAuthNo) {
+    Optional<UserDTO> match = validUsers.stream().filter(dto -> dto.getAlternateAuthNo().equalsIgnoreCase(altAuthNo))
+        .findFirst();
+    if (match.isPresent()) {
+      return ResponseEntity.ok(match.get());
+    } else {
+      return ResponseEntity.notFound().build();
+    }
   }
 
 }

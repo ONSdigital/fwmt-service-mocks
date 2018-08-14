@@ -16,15 +16,51 @@ import uk.gov.ons.fwmt.service_mocks.resource_service.dto.FieldPeriodDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
 @RequestMapping("/resources/fieldPeriods")
 public class FieldPeriodController {
 
+  private List<FieldPeriodDTO> validFieldPeriods = new ArrayList<>();
+
+  public FieldPeriodController() {
+    validFieldPeriods.add(new FieldPeriodDTO(
+        LocalDate.of(2018, 02, 01),
+        LocalDate.of(2018, 03, 31),
+        "A"
+    ));
+    validFieldPeriods.add(new FieldPeriodDTO(
+        LocalDate.of(2018, 03, 01),
+        LocalDate.of(2018, 04, 30),
+        "B"
+    ));
+    validFieldPeriods.add(new FieldPeriodDTO(
+        LocalDate.of(2018, 04, 01),
+        LocalDate.of(2018, 05, 31),
+        "C"
+    ));
+    validFieldPeriods.add(new FieldPeriodDTO(
+        LocalDate.of(2018, 02, 01),
+        LocalDate.of(2018, 03, 31),
+        "100"
+    ));
+    validFieldPeriods.add(new FieldPeriodDTO(
+        LocalDate.of(2018, 03, 01),
+        LocalDate.of(2018, 04, 30),
+        "200"
+    ));
+    validFieldPeriods.add(new FieldPeriodDTO(
+        LocalDate.of(2018, 04, 01),
+        LocalDate.of(2018, 05, 31),
+        "300"
+    ));
+  }
+
   @GetMapping(produces = "application/json")
   public ResponseEntity<List<FieldPeriodDTO>> getAllFieldPeriods() {
-    FieldPeriodDTO fieldPeriod = new FieldPeriodDTO(LocalDate.now(), LocalDate.now(),"test");
+    FieldPeriodDTO fieldPeriod = new FieldPeriodDTO(LocalDate.now(), LocalDate.now(), "test");
     final List<FieldPeriodDTO> result = new ArrayList<>();
     result.add(fieldPeriod);
     return ResponseEntity.ok(result);
@@ -32,8 +68,13 @@ public class FieldPeriodController {
 
   @GetMapping(value = "/{fieldPeriod}", produces = "application/json")
   public ResponseEntity<FieldPeriodDTO> getFieldPeriod(@PathVariable("fieldPeriod") String fieldPeriod) {
-    final FieldPeriodDTO result = new FieldPeriodDTO(LocalDate.now(), LocalDate.now(),"test");
-    return ResponseEntity.ok(result);
+    Optional<FieldPeriodDTO> match = validFieldPeriods.stream().filter(dto -> dto.getFieldPeriod().equalsIgnoreCase(fieldPeriod))
+        .findFirst();
+    if (match.isPresent()) {
+      return ResponseEntity.ok(match.get());
+    } else {
+      return ResponseEntity.notFound().build();
+    }
   }
 
   @PostMapping(consumes = "application/json", produces = "application/json")

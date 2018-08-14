@@ -13,7 +13,7 @@ import uk.gov.ons.fwmt.service_mocks.logging.MockLogger;
 import uk.gov.ons.fwmt.service_mocks.logging.MockMessage;
 
 @RestController
-@RequestMapping("monitor")
+@RequestMapping("logger")
 public class MockLoggerController {
   MockLogger mockLogger;
 

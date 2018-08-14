@@ -30,7 +30,6 @@ public class JobFileController {
   public ResponseEntity<JobFileDTO> storeJobFile(@RequestParam("file") MultipartFile file, boolean validated){
     final JobFileDTO result = new JobFileDTO(file.getOriginalFilename(),LocalDateTime.now(),LocalDateTime.now(),true);
     return new ResponseEntity<>(result, HttpStatus.CREATED);
-
   }
 
   @GetMapping(value = "/{fileName}")
