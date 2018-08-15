@@ -25,7 +25,7 @@ description = "fwmt-service-mocks"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = '1.0.1'
+version = '1.0.1-SNAPSHOT'
 
 jar {
     group = 'uk.gov.ons.fwmt'
@@ -97,7 +97,7 @@ artifactory {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = group
+            groupId = 'uk.gov.ons.fwmt'
             artifactId = 'fwmt-service-mocks'
             version = version
 
