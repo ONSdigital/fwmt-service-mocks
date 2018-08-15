@@ -1,7 +1,22 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
+    }
+}
+
 apply plugin: 'java'
-apply plugin: 'idea'
 apply plugin: 'application'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'idea'
 
 mainClassName = 'uk.gov.ons.fwmt.service_mocks.Application'
 
@@ -10,7 +25,7 @@ description = "fwmt-service-mocks"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = '1.0.0'
+version = '1.0.1'
 
 jar {
     group = 'uk.gov.ons.fwmt'
@@ -18,17 +33,9 @@ jar {
     version = version
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
-    }
-}
-
 repositories {
     mavenCentral()
+    mavenLocal()
     maven { url "http://artifactory-sdc.onsdigital.uk/artifactory/libs-snapshot" }
     maven { url "http://artifactory-sdc.onsdigital.uk/artifactory/libs-release" }
     maven { url "https://oss.sonatype.org/content/repositories/libs-snapshot" }
@@ -74,6 +81,33 @@ task genJaxb {
             }
         }
     }
+}
+
+artifactory {
+    contextUrl = 'http://artifactory.rmdev.onsdigital.uk/artifactory'
+    publish {
+        repository {
+            repoKey = 'libs-snapshot-local'
+            username = System.getenv('ARTIFACTORY_USERNAME')
+            password = System.getenv('ARTIFACTORY_PASSWORD')
+        }
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = 'fwmt-service-mocks'
+            version = version
+
+            from components.java
+        }
+    }
+}
+
+artifactoryPublish {
+    publications ('maven')
 }
 
 dependencies {
