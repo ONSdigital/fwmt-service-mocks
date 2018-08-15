@@ -35,6 +35,12 @@ public class JobController {
     validJobs.add(new JobDTO(
         "job-003", "9999", LocalDateTime.of(2018, 1, 3, 7, 0)
     ));
+    validJobs.add(new JobDTO(
+        "quota_1 1 1 1 1 1 1 1 - B [Rissue_no_1]",
+        "1234",
+        LocalDateTime.of(2018, 1, 4, 7, 0)
+    ));
+
   }
 
   @GetMapping(produces = "application/json")

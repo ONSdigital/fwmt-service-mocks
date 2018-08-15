@@ -28,7 +28,7 @@ public class GenericOutgoingWs {
   @PayloadRoot(namespace = "http://schemas.consiliumtechnologies.com/services/mobile/2009/03/messaging", localPart = "request")
   @ResponsePayload
   public JAXBElement<Void> sendAdapterOutput(@RequestPayload JAXBElement<WebServiceAdapterOutputRequest> request) {
-    mockLogger.logEndpoint("SendMessage");
+    mockLogger.logEndpoint("GenericOutgoingWs", "sendAdapterOutput");
     mockLogger.logParsedRequest(request.getValue());
     JAXBElement<Void> response = new JAXBElement<>(new QName(null, "null"), Void.class, null);
     mockLogger.logParsedResponse(response);

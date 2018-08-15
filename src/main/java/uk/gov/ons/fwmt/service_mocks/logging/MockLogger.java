@@ -23,9 +23,10 @@ public class MockLogger {
     }
   }
 
-  public void logEndpoint(String endpoint) {
+  public void logEndpoint(String endpoint, String method) {
     setupCurrentMessage();
     currentMessage.get().endpoint = endpoint;
+    currentMessage.get().method = method;
   }
 
   public void logRawRequest(String rawHeaders, String rawHtml) {

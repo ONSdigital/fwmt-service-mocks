@@ -29,7 +29,7 @@ public class OutgoingWs {
   @ResponsePayload
   public void sendUpdateVisitStatusRequestOutput(
       @RequestPayload JAXBElement<UpdateVisitStatusRequest> request) {
-    mockLogger.logEndpoint("SendMessage");
+    mockLogger.logEndpoint("OutgoingWs", "sendMessage");
     mockLogger.logParsedRequest(request.getValue());
     mockLogger.logParsedResponse(null);
   }
@@ -40,7 +40,7 @@ public class OutgoingWs {
   // http://forum.spring.io/forum/spring-projects/web-services/42740-responding-with-an-empty-soap-body
   public void sendCompleteVisitStatusRequestOutputLowercase(
       @RequestPayload JAXBElement<CompleteVisitRequest> request) {
-    mockLogger.logEndpoint("SendCompleteVisitStatusRequestOutput");
+    mockLogger.logEndpoint("OutgoingWs", "sendCompleteVisitStatusRequestOutput");
     mockLogger.logParsedRequest(request);
     mockLogger.logParsedResponse(null);
   }
@@ -49,7 +49,7 @@ public class OutgoingWs {
   @ResponsePayload
   public void sendRequestVisitRequestOutput(
       @RequestPayload JAXBElement<RequestVisitRequest> request) {
-    mockLogger.logEndpoint("SendRequestVisitRequestOutput");
+    mockLogger.logEndpoint("OutgoingWs", "sendRequestVisitRequestOutput");
     mockLogger.logParsedRequest(request);
     mockLogger.logParsedResponse(null);
   }
@@ -58,7 +58,7 @@ public class OutgoingWs {
   @ResponsePayload
   public void sendSubmitDocumentRequestOutput(
       @RequestPayload JAXBElement<SubmitDocumentRequest> request) {
-    mockLogger.logEndpoint("SendSubmitDocumentRequestOutput");
+    mockLogger.logEndpoint("OutgoingWs", "sendSubmitDocumentRequestOutput");
     mockLogger.logParsedRequest(request);
     mockLogger.logParsedResponse(null);
   }
@@ -67,7 +67,7 @@ public class OutgoingWs {
   @ResponsePayload
   public void sendCompositeVisitRequestOutput(
       @RequestPayload JAXBElement<CompositeVisitRequest> request) {
-    mockLogger.logEndpoint("SendCompositeVisitRequestOutput");
+    mockLogger.logEndpoint("OutgoingWs", "sendCompositeVisitRequestOutput");
     mockLogger.logParsedRequest(request);
     mockLogger.logParsedResponse(null);
   }
@@ -76,7 +76,7 @@ public class OutgoingWs {
   @ResponsePayload
   public void sendSubmitFormResultRequestOutput(
       @RequestPayload JAXBElement<SubmitFormResultRequest> request) {
-    mockLogger.logEndpoint("SendSubmitFormResultRequestOutput");
+    mockLogger.logEndpoint("OutgoingWs", "sendSubmitFormResultRequestOutput");
     mockLogger.logParsedRequest(request);
     mockLogger.logParsedResponse(null);
   }
@@ -85,7 +85,7 @@ public class OutgoingWs {
   @ResponsePayload
   public void sendSubmitLocationRequestOutput(
       @RequestPayload JAXBElement<SubmitLocationRequest> request) {
-    mockLogger.logEndpoint("SendSubmitLocationRequestOutput");
+    mockLogger.logEndpoint("OutgoingWs", "sendSubmitLocationRequestOutput");
     mockLogger.logParsedRequest(request);
     mockLogger.logParsedResponse(null);
   }
