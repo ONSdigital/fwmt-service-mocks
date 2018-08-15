@@ -40,6 +40,13 @@ public class JobController {
         "1234",
         LocalDateTime.of(2018, 1, 4, 7, 0)
     ));
+    validJobs.add(new JobDTO(
+        "tla_1-REISS1-001-200",
+        "1234",
+        LocalDateTime.of(2018, 1, 4, 7, 0)
+    ));
+
+    // second line, auth="1234", quota="B", id="tla_1-REISS1-001-200"
 
   }
 
