@@ -1,6 +1,7 @@
 package uk.gov.ons.fwmt.service_mocks.logging;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.HtmlUtils;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -31,9 +32,9 @@ public class MockLogger {
 
   public void logRawRequest(String rawHeaders, String rawHtml) {
     setupCurrentMessage();
-    currentMessage.get().requestTimestamp = LocalDateTime.now();
+    currentMessage.get().requestTimestamp = LocalDateTime.now().toString();
     currentMessage.get().requestRawHeaders = rawHeaders;
-    currentMessage.get().requestRawHtml = rawHtml;
+    currentMessage.get().requestRawHtml = HtmlUtils.htmlEscape(rawHtml);
   }
 
   public <R> void logParsedRequest(R request) {
@@ -43,9 +44,9 @@ public class MockLogger {
 
   public void logRawResponse(String rawHeaders, String rawHtml) {
     setupCurrentMessage();
-    currentMessage.get().responseTimestamp = LocalDateTime.now();
+    currentMessage.get().responseTimestamp = LocalDateTime.now().toString();
     currentMessage.get().responseRawHeaders = rawHeaders;
-    currentMessage.get().responseRawHtml = rawHtml;
+    currentMessage.get().responseRawHtml = HtmlUtils.htmlEscape(rawHtml);
     currentMessage.get().isFault = false;
   }
 
@@ -56,9 +57,9 @@ public class MockLogger {
 
   public void logRawFault(String rawHeaders, String rawHtml) {
     setupCurrentMessage();
-    currentMessage.get().responseTimestamp = LocalDateTime.now();
+    currentMessage.get().responseTimestamp = LocalDateTime.now().toString();
     currentMessage.get().responseRawHeaders = rawHeaders;
-    currentMessage.get().responseRawHtml = rawHtml;
+    currentMessage.get().responseRawHtml = HtmlUtils.htmlEscape(rawHtml);
     currentMessage.get().isFault = true;
   }
 
