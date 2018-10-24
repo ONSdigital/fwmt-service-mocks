@@ -13,13 +13,13 @@ public class MockMessage {
   public String method;
 
   // request
-  public LocalDateTime requestTimestamp;
+  public String requestTimestamp;
   public String requestRawHeaders;
   public String requestRawHtml;
   public Object requestMessageParsed;
 
   // response
-  public LocalDateTime responseTimestamp;
+  public String responseTimestamp;
   public String responseRawHeaders;
   public String responseRawHtml;
   public Object responseMessageParsed;
