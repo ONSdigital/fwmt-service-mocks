@@ -33,3 +33,8 @@ totalmobile:
     login-url: "/WebAdmin/Login"
     save-user-url: "/WebAdmin/Administration/Users/SaveUser"
 
+rabbit:
+  host: localhost
+  username:
+  password:
+  

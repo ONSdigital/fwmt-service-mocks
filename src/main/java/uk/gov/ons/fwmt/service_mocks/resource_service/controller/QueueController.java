@@ -4,12 +4,14 @@ package uk.gov.ons.fwmt.service_mocks.resource_service.controller;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.base.Strings;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -19,13 +21,26 @@ import com.rabbitmq.client.GetResponse;
 @RequestMapping("/queue")
 public class QueueController {
 
+  @Value("rabbit.host")
+  private String rabbitHost;
+  
+  @Value("rabbit.username")
+  private String rabbitUsername;
+  
+  @Value("rabbit.password")
+  private String rabbitPassword;
+  
   @GetMapping(value = "/message/{qname}", produces = "application/json")
   public ResponseEntity<String> getMessageOffQueue(@PathVariable("qname") String qname) {
     Connection connection = null;
     Channel channel = null;
     try {
       ConnectionFactory factory = new ConnectionFactory();
-      factory.setHost("localhost");
+      factory.setHost(rabbitHost);
+      if (!Strings.isNullOrEmpty(rabbitUsername)){
+        factory.setUsername(rabbitUsername);
+        factory.setPassword(rabbitPassword);
+      }
       connection = factory.newConnection();
       channel = connection.createChannel();
 
