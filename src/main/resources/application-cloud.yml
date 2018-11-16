@@ -1,0 +1,7 @@
+rabbit:
+  host: ${cloud.services.fwmt-rabbit.connection.host}
+  username: ${cloud.services.fwmt-rabbit.connection.username}
+  password: ${cloud.services.fwmt-rabbit.connection.password}
+  port: ${cloud.services.fwmt-rabbit.connection.port}
+  virtualHost: ${cloud.services.fwmt-rabbit.connection.virtualhost}
+  

@@ -24,7 +24,7 @@ totalmobile:
   username: ""
   password: ""
   url: ""
-  message-queue-path: "/Services/TM/v20/Messaging/MessageQueueWs.asmx"
+  message-queue-path: "/ws/MessageQueueWs.asmx"
   message-queue-wsdl-path: "src/main/resources/wsdl/Messaging_MessageQueueWs.wsdl"
   message-queue-namespace: "http://schemas.consiliumtechnologies.com/wsdl/mobile/2007/07/messaging/"
   message-queue-package: "com.consiliumtechnologies.schemas.services.mobile._2009._03.messaging"
@@ -35,6 +35,9 @@ totalmobile:
 
 rabbit:
   host: localhost
-  username:
-  password:
+  username: guest
+  password: guest
+  port: 15672
+  virtualHost: /
+  
   
