@@ -22,5 +22,5 @@ after_success:
     then echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin;
     docker build -t sdcplatform/fwmtmocks -t sdcplatform/fwmtmocks:fwmt-mock-$TRAVIS_BUILD_NUMBER --build-arg jar=build/libs/fwmt-service-mocks-*.jar .;
     docker push sdcplatform/fwmtmocks;
-    #./gradlew artifactPublish;
+    #./gradlew artifactPublish; test build
     fi
