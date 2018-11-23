@@ -20,6 +20,6 @@ cache:
 after_success:
 - if [[ "$TRAVIS_BRANCH" = "master" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]] && [[ $TRAVIS_COMMIT_MESSAGE != "JENKINS SNAPSHOT UPDATE" ]];
   then echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin;
-  docker build -t sdcplatform/fwmtmocks -t sdcplatform/fwmtmocks:mock-service-$TRAVIS_BUILD_NUMBER --build-arg jar=build/libs/fwmt-job-service-v2-*.jar .;
+  docker build -t sdcplatform/fwmtmocks -t sdcplatform/fwmtmocks:mock-service-$TRAVIS_BUILD_NUMBER --build-arg jar=build/libs/fwmt-service-mocks-*.jar .;
   docker push sdcplatform/fwmtmocks;
   fi
