@@ -22,10 +22,10 @@ mainClassName = 'uk.gov.ons.fwmt.service_mocks.Application'
 
 description = "fwmt-service-mocks"
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
-version = '1.0.1-SNAPSHOT'
+version = '3.0.0-SNAPSHOT'
 
 jar {
     group = 'uk.gov.ons.fwmt'
@@ -107,19 +107,27 @@ publishing {
 }
 
 artifactoryPublish {
-    publications ('maven')
+    publications 'maven'
 }
 
 dependencies {
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.1'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.3.1'
+    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.13.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web-services', version: '1.5.13.RELEASE'
     compile(group: 'org.springframework.cloud', name: 'spring-cloud-spring-service-connector', version: '1.2.5.RELEASE') {
         exclude(module: 'log4j')
     }
+
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
     compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
     compile group: 'org.json', name: 'json', version: '20180130'
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.4'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.4'
     compile group: 'org.yaml', name: 'snakeyaml', version: '1.19'
 
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.0'
