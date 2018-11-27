@@ -87,7 +87,7 @@ public class QueueController {
     Channel channel = null;
     try {
       ConnectionFactory factory = new ConnectionFactory();
-      factory.setHost("localhost");
+      factory.setHost(rabbitHost);
       connection = factory.newConnection();
       channel = connection.createChannel();
 
