@@ -66,6 +66,7 @@ public class QueueController {
     
     try {
       if(qname.toUpperCase().contains("ACTION.FIELD")){
+        factory = getRmConnectionFactory();
         log.info("Building RM RabbitMQ Factory");
       }else{
         factory = getFwmtConnectionFactory();
@@ -105,6 +106,7 @@ public class QueueController {
     
     try {
       if(qname.toUpperCase().contains("ACTION.FIELD")){
+        factory = getRmConnectionFactory();
         log.info("Building RM RabbitMQ Factory");
       }else{
         factory = getFwmtConnectionFactory();
@@ -196,6 +198,7 @@ public class QueueController {
     
     try {
       if(qname.toUpperCase().contains("ACTION.FIELD")){
+        factory = getRmConnectionFactory();
         log.info("Building RM RabbitMQ Factory");
       }else{
         factory = getFwmtConnectionFactory();
