@@ -170,7 +170,7 @@ public class QueueController {
       BasicProperties.Builder builder = new BasicProperties.Builder();
       builder.contentType("text/xml");
       BasicProperties properties = builder.build();
-//      channel.basicPublish(exchange, routingkey, properties, message.getBytes());
+
       channel.basicPublish("", routingkey, properties, message.getBytes());
       log.info("Published to exchange: " + exchange);
 
