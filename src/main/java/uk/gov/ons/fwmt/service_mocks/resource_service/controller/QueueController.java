@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.common.base.Strings;
 import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -29,31 +28,49 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/queue")
 public class QueueController {
 
-  @Value("${rabbit.host}")
-  private String rabbitHost;
+  @Value("${rabbitmq.fwmt.host}")
+  private String rabbitmqFwmtHost;
   
-  @Value("${rabbit.username}")
-  private String rabbitUsername;
+  @Value("${rabbitmq.fwmt.username}")
+  private String rabbitmqFwmtUsername;
   
-  @Value("${rabbit.password}")
-  private String rabbitPassword;
+  @Value("${rabbitmq.fwmt.password}")
+  private String rabbitmqFwmtPassword;
   
-  @Value("${rabbit.port}")
-  private int rabbitPort;
+  @Value("${rabbitmq.fwmt.port}")
+  private int rabbitmqFwmtPort;
   
-  @Value("${rabbit.virtualHost}")
-  private String rabbitVirtualHost;
+  @Value("${rabbitmq.fwmt.virtualHost}")
+  private String rabbitmqFwmtVirtualHost;
+
+  @Value("${rabbitmq.rm.host}")
+  private String rabbitmqRmHost;
+  
+  @Value("${rabbitmq.rm.username}")
+  private String rabbitmqRmUsername;
+  
+  @Value("${rabbitmq.rm.password}")
+  private String rabbitmqRmPassword;
+  
+  @Value("${rabbitmq.rm.port}")
+  private int rabbitmqRmPort;
+  
+  @Value("${rabbitmq.rm.virtualHost}")
+  private String rabbitmqRmVirtualHost;
   
   @GetMapping(value = "/message", produces = "application/json")
   public ResponseEntity<String> getMessageOffQueue(@RequestParam("qname") String qname) {
     Connection connection = null;
     Channel channel = null;
+    ConnectionFactory factory = null;
+    
     try {
-      ConnectionFactory factory = new ConnectionFactory();
-      factory.setHost(rabbitHost);
-      if (!Strings.isNullOrEmpty(rabbitUsername)){
-        factory.setUsername(rabbitUsername);
-        factory.setPassword(rabbitPassword);
+      if(qname.toUpperCase().contains("ACTION.FIELD")){
+        factory = getRmConnectionFactory();
+        log.info("Building RM RabbitMQ Factory");
+      }else{
+        factory = getFwmtConnectionFactory();
+        log.info("Building FWMT RabbitMQ Factory");
       }
       connection = factory.newConnection();
       channel = connection.createChannel();
@@ -85,9 +102,16 @@ public class QueueController {
   public ResponseEntity<Long> getMessageCount(@PathVariable("qname") String qname) {
     Connection connection = null;
     Channel channel = null;
+    ConnectionFactory factory = null;
+    
     try {
-      ConnectionFactory factory = new ConnectionFactory();
-      factory.setHost(rabbitHost);
+      if(qname.toUpperCase().contains("ACTION.FIELD")){
+        factory = getRmConnectionFactory();
+        log.info("Building RM RabbitMQ Factory");
+      }else{
+        factory = getFwmtConnectionFactory();
+        log.info("Building FWMT RabbitMQ Factory");
+      }
       connection = factory.newConnection();
       channel = connection.createChannel();
 
@@ -109,12 +133,21 @@ public class QueueController {
     }
   }
   
-  private ConnectionFactory getConnectionFactory() {
+  private ConnectionFactory getFwmtConnectionFactory() {
     ConnectionFactory factory = new ConnectionFactory();
-    factory.setHost(rabbitHost);
-    factory.setUsername(rabbitUsername);
-    factory.setPassword(rabbitPassword);
-    factory.setVirtualHost(rabbitVirtualHost);
+    factory.setHost(rabbitmqFwmtHost);
+    factory.setUsername(rabbitmqFwmtUsername);
+    factory.setPassword(rabbitmqFwmtPassword);
+    factory.setVirtualHost(rabbitmqFwmtVirtualHost);
+    return factory;
+  }
+  
+  private ConnectionFactory getRmConnectionFactory() {
+    ConnectionFactory factory = new ConnectionFactory();
+    factory.setHost(rabbitmqRmHost);
+    factory.setUsername(rabbitmqRmUsername);
+    factory.setPassword(rabbitmqRmPassword);
+    factory.setVirtualHost(rabbitmqRmVirtualHost);
     return factory;
   }
   
@@ -122,17 +155,25 @@ public class QueueController {
   public ResponseEntity<Boolean> addMessage(@RequestParam("exchange") String exchange, @RequestParam("routingkey") String routingkey, @RequestBody String message ){
     Connection connection = null;
     Channel channel = null;
-
+    ConnectionFactory factory = null;
+    
     try {
-      ConnectionFactory factory = getConnectionFactory();
-
+      if(routingkey.toUpperCase().contains("ACTION.FIELD")){
+        factory = getRmConnectionFactory();
+        log.info("Building RM RabbitMQ Factory");
+      }else{
+        factory = getFwmtConnectionFactory();
+        log.info("Building FWMT RabbitMQ Factory");
+      }
+      
       connection = factory.newConnection();
       channel = connection.createChannel();
 
       BasicProperties.Builder builder = new BasicProperties.Builder();
       builder.contentType("text/xml");
       BasicProperties properties = builder.build();
-      channel.basicPublish(exchange, routingkey, properties, message.getBytes());
+
+      channel.basicPublish("", routingkey, properties, message.getBytes());
       log.info("Published to exchange: " + exchange);
 
       return ResponseEntity.ok(true);
@@ -153,9 +194,16 @@ public class QueueController {
   public ResponseEntity<Boolean> deleteMessage(@RequestParam("qname") String qname){
     Connection connection = null;
     Channel channel = null;
-
+    ConnectionFactory factory = null;
+    
     try {
-      ConnectionFactory factory = getConnectionFactory();
+      if(qname.toUpperCase().contains("ACTION.FIELD")){
+        factory = getRmConnectionFactory();
+        log.info("Building RM RabbitMQ Factory");
+      }else{
+        factory = getFwmtConnectionFactory();
+        log.info("Building FWMT RabbitMQ Factory");
+      }
       connection = factory.newConnection();
       channel = connection.createChannel();
       channel.queuePurge(qname);

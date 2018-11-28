@@ -7,6 +7,7 @@ applications:
   path: 'build/libs/fwmt-service-mocks-1.0.0.jar'
   services:
   - 'fwmt-rabbit'
+  - 'rm-rabbitmq'
   env:
     logging_level_uk.gov.ons.fwmt: DEBUG
     logging_level_org.springframework.web: TRACE
