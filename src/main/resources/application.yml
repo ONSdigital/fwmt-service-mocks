@@ -38,11 +38,11 @@ rabbitmq:
     host: localhost
     username: guest
     password: guest
-    port: 15672
+    port: 5672
     virtualHost: /
   fwmt:
     host: localhost
     username: guest
     password: guest
-    port: 15672
+    port: 5672
     virtualHost: /
