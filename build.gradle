@@ -9,23 +9,24 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'com.jfrog.artifactory'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-apply plugin: 'idea'
+plugins {
+    id 'java'
+    id 'idea'
+    id 'application'
+    id 'maven'
+    id 'maven-publish'
+    id 'org.springframework.boot' version '2.1.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.6.RELEASE'
+    id 'com.jfrog.artifactory' version '4.8.1'
+}
 
 mainClassName = 'uk.gov.ons.fwmt.service_mocks.Application'
 
-description = "fwmt-service-mocks"
-
+description = 'fwmt-service-mocks'
+group = 'uk.gov.ons.fwmt'
+version = '3.0.0-SNAPSHOT'
 sourceCompatibility = 11
 targetCompatibility = 11
-
-version = '3.0.0-SNAPSHOT'
 
 jar {
     group = 'uk.gov.ons.fwmt'
