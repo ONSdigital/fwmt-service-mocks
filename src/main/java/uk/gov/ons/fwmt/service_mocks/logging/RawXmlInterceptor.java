@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.soap.SoapHeaderElement;
 import org.springframework.ws.soap.server.SoapEndpointInterceptor;
-import uk.gov.ons.fwmt.service_mocks.logging.MockLogger;
-import uk.gov.ons.fwmt.service_mocks.logging.MockMessage;
 
 import java.io.ByteArrayOutputStream;
 

@@ -5,12 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import uk.gov.ons.fwmt.service_mocks.logging.MockLogger;
-import uk.gov.ons.fwmt.service_mocks.logging.MockMessage;
 
 @RestController
 @RequestMapping("logger")
@@ -36,6 +31,5 @@ public class MockLoggerController {
   public void reset() {
     mockLogger.reset();
   }
-
 
 }

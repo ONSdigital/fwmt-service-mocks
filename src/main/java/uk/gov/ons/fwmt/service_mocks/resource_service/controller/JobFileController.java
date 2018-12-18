@@ -27,8 +27,9 @@ import java.time.LocalDateTime;
 public class JobFileController {
 
   @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json")
-  public ResponseEntity<JobFileDTO> storeJobFile(@RequestParam("file") MultipartFile file, boolean validated){
-    final JobFileDTO result = new JobFileDTO(file.getOriginalFilename(),LocalDateTime.now(),LocalDateTime.now(),true);
+  public ResponseEntity<JobFileDTO> storeJobFile(@RequestParam("file") MultipartFile file, boolean validated) {
+    final JobFileDTO result = new JobFileDTO(file.getOriginalFilename(), LocalDateTime.now(), LocalDateTime.now(),
+        true);
     return new ResponseEntity<>(result, HttpStatus.CREATED);
   }
 
@@ -37,6 +38,7 @@ public class JobFileController {
     InputStream initialStream = new FileInputStream(new File("src/main/resources/sample_GFF_2018-07-01T19-09-54Z.csv"));
     final byte[] fileBytes = new byte[initialStream.available()];
     final ByteArrayResource resource = new ByteArrayResource(fileBytes);
-    return ResponseEntity.ok().contentLength(fileBytes.length).contentType(MediaType.APPLICATION_OCTET_STREAM).body(resource);
+    return ResponseEntity.ok().contentLength(fileBytes.length).contentType(MediaType.APPLICATION_OCTET_STREAM)
+        .body(resource);
   }
 }
