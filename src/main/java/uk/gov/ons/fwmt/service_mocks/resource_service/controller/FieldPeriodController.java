@@ -27,33 +27,33 @@ public class FieldPeriodController {
 
   public FieldPeriodController() {
     validFieldPeriods.add(new FieldPeriodDTO(
-        LocalDate.of(2018, 02, 01),
-        LocalDate.of(2018, 03, 31),
+        LocalDate.of(2018, 2, 1),
+        LocalDate.of(2018, 3, 31),
         "A"
     ));
     validFieldPeriods.add(new FieldPeriodDTO(
-        LocalDate.of(2018, 03, 01),
-        LocalDate.of(2018, 04, 30),
+        LocalDate.of(2018, 3, 1),
+        LocalDate.of(2018, 4, 30),
         "B"
     ));
     validFieldPeriods.add(new FieldPeriodDTO(
-        LocalDate.of(2018, 04, 01),
-        LocalDate.of(2018, 05, 31),
+        LocalDate.of(2018, 4, 1),
+        LocalDate.of(2018, 5, 31),
         "C"
     ));
     validFieldPeriods.add(new FieldPeriodDTO(
-        LocalDate.of(2018, 02, 01),
-        LocalDate.of(2018, 03, 31),
+        LocalDate.of(2018, 2, 1),
+        LocalDate.of(2018, 3, 31),
         "100"
     ));
     validFieldPeriods.add(new FieldPeriodDTO(
-        LocalDate.of(2018, 03, 01),
-        LocalDate.of(2018, 04, 30),
+        LocalDate.of(2018, 3, 1),
+        LocalDate.of(2018, 4, 30),
         "200"
     ));
     validFieldPeriods.add(new FieldPeriodDTO(
-        LocalDate.of(2018, 04, 01),
-        LocalDate.of(2018, 05, 31),
+        LocalDate.of(2018, 4, 1),
+        LocalDate.of(2018, 5, 31),
         "300"
     ));
   }
@@ -68,7 +68,8 @@ public class FieldPeriodController {
 
   @GetMapping(value = "/{fieldPeriod}", produces = "application/json")
   public ResponseEntity<FieldPeriodDTO> getFieldPeriod(@PathVariable("fieldPeriod") String fieldPeriod) {
-    Optional<FieldPeriodDTO> match = validFieldPeriods.stream().filter(dto -> dto.getFieldPeriod().equalsIgnoreCase(fieldPeriod))
+    Optional<FieldPeriodDTO> match = validFieldPeriods.stream()
+        .filter(dto -> dto.getFieldPeriod().equalsIgnoreCase(fieldPeriod))
         .findFirst();
     if (match.isPresent()) {
       return ResponseEntity.ok(match.get());

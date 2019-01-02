@@ -5,7 +5,7 @@ apply plugin: 'org.springframework.boot'
 
 mainClassName = 'uk.gov.ons.fwmt.service_mocks.Application'
 
-description = "fwmt-service-mocks"
+description = 'fwmt-service-mocks'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -23,16 +23,18 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE')
     }
 }
 
 repositories {
     mavenCentral()
-    maven { url "http://artifactory-sdc.onsdigital.uk/artifactory/libs-snapshot" }
-    maven { url "http://artifactory-sdc.onsdigital.uk/artifactory/libs-release" }
-    maven { url "https://oss.sonatype.org/content/repositories/libs-snapshot" }
-    maven { url "http://repo.maven.apache.org/maven2" }
+    if (!project.hasProperty('omitSDCArtifactory')) {
+        maven { url 'http://artifactory-sdc.onsdigital.uk/artifactory/libs-snapshot' }
+        maven { url 'http://artifactory-sdc.onsdigital.uk/artifactory/libs-release' }
+    }
+    maven { url 'https://oss.sonatype.org/content/repositories/libs-snapshot' }
+    maven { url 'http://repo.maven.apache.org/maven2' }
 }
 
 configurations {
@@ -48,28 +50,28 @@ task genJaxb {
 
     doLast() {
         project.ant {
-            taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+            taskdef name: 'xjc', classname: 'com.sun.tools.xjc.XJCTask',
                     classpath: configurations.jaxb.asPath
             mkdir(dir: sourcesDir)
             mkdir(dir: classesDir)
 
             xjc(destdir: sourcesDir) {
-                arg(value: "-wsdl")
-                produces(dir: sourcesDir, includes: "**/*.java")
-                schema(dir: schema, includes: "**/*.wsdl")
+                arg(value: '-wsdl')
+                produces(dir: sourcesDir, includes: '**/*.java')
+                schema(dir: schema, includes: '**/*.wsdl')
             }
 
             javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
-                    debugLevel: "lines,vars,source",
+                    debugLevel: 'lines,vars,source',
                     classpath: configurations.jaxb.asPath) {
                 src(path: sourcesDir)
-                include(name: "**/*.java")
-                include(name: "*.java")
+                include(name: '**/*.java')
+                include(name: '*.java')
             }
 
             copy(todir: classesDir) {
                 fileset(dir: sourcesDir, erroronmissingdir: false) {
-                    exclude(name: "**/*.java")
+                    exclude(name: '**/*.java')
                 }
             }
         }
@@ -77,27 +79,33 @@ task genJaxb {
 }
 
 dependencies {
-	compile group: 'uk.gov.ons.fwmt', name: 'fwmt-gateway-common', version: '0.0.8-RELEASE'
-    compile group: 'com.rabbitmq', name: 'amqp-client', version: '5.4.2'
+    compile group: 'uk.gov.ons.fwmt', name: 'fwmt-gateway-common', version: '0.0.8-RELEASE'
+
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.13.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web-services', version: '1.5.13.RELEASE'
     compile(group: 'org.springframework.cloud', name: 'spring-cloud-spring-service-connector', version: '1.2.5.RELEASE') {
         exclude(module: 'log4j')
     }
-   compile(group: 'org.springframework.cloud', name: 'spring-cloud-cloudfoundry-connector', version: '1.2.5.RELEASE') {
+    compile(group: 'org.springframework.cloud', name: 'spring-cloud-cloudfoundry-connector', version: '1.2.5.RELEASE') {
         exclude(module: 'log4j')
     }
+
+    compile group: 'com.rabbitmq', name: 'amqp-client', version: '5.4.2'
+
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+
     compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+
     compile group: 'org.json', name: 'json', version: '20180130'
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
     compile group: 'org.yaml', name: 'snakeyaml', version: '1.21'
+
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
 
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.0'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.0'
 
+    jaxb 'com.sun.xml.bind:jaxb-xjc:2.1.7'
     compile(files(genJaxb.classesDir).builtBy(genJaxb))
-    jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
 
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.5'
@@ -105,6 +113,6 @@ dependencies {
     testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.9.RELEASE') {
         exclude(module: 'android-json')
     }
-    testCompile "junit:junit:4.12"
+    testCompile 'junit:junit:4.12'
 }
 
