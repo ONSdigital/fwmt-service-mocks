@@ -75,8 +75,8 @@ public class QueueController {
     }
   }
 
-  @GetMapping(value = "/count/{qname}", produces = "application/json")
-  public ResponseEntity<Long> getMessageCount(@PathVariable("qname") String qname) {
+  @GetMapping(value = "/count/", produces = "application/json")
+  public ResponseEntity<Long> getMessageCount(@RequestParam("qname") String qname) {
     ConnectionFactory factory = getConnectionFactory(qname);
 
     try (Connection connection = factory.newConnection()) {
