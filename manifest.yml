@@ -1,6 +1,6 @@
 ---
 applications:
-- name: 'Mock-TM'
+- name: 'fwmt-service-mocks-dev'
   instances: 1
   timeout: 180
   memory: 1024M
@@ -9,5 +9,9 @@ applications:
   - 'fwmt-rabbit'
   - 'rm-rabbitmq'
   env:
-    logging_level_uk.gov.ons.fwmt: DEBUG
-    logging_level_org.springframework.web: TRACE
+    logging_level_uk.gov.ons.fwmt: WARN
+    logging_level_org.springframework.security: ERROR
+    logging_level_org.springframework.web: ERROR
+    logging_level_org.hibernate: ERROR
+    logging_level_org.apache.commons.dbcp2: ERROR
+    logging_level_org.springframework.amqp: ERROR
